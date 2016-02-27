@@ -36,13 +36,9 @@ class MovieFavoritesController: NSObject {
             let favoritesData = ud.objectForKey("favorite-set") as? NSData
             
             if let favoritesData = favoritesData {
-                if let savedFavoriteArray = NSKeyedUnarchiver.unarchiveObjectWithData(favoritesData) as? [String]
-                {
-                    print(savedFavoriteArray)
-                    
-                    favoriteSet = Set(savedFavoriteArray)
-                    return
-                }
+                favoriteSet = NSKeyedUnarchiver.unarchiveObjectWithData(favoritesData) as? Set<String>
+                print(favoriteSet)
+                return
             }
             
             // no preference ever saved, create an empty set
@@ -68,7 +64,6 @@ class MovieFavoritesController: NSObject {
         
         let favoriteData = NSKeyedArchiver.archivedDataWithRootObject(self.favoriteSet!)
         ud.setObject(favoriteData, forKey: "favorite-set")
-        ud.setObject(favoriteSet, forKey: "Array")
         ud.synchronize()
     }
     

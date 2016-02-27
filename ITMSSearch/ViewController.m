@@ -23,6 +23,9 @@
 @property (strong) NSArray *movieArray;
 @property (weak) IBOutlet UICollectionView *movieCollectionView;
 
+// useful to dismiss the keyboard
+@property (strong) UIGestureRecognizer *tapOutsideSearchBarRecognizer;
+
 @end
 
 @implementation ViewController
@@ -67,6 +70,21 @@
 }
 
 #pragma mark search bar delegate methods
+
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
+{
+    if (self.tapOutsideSearchBarRecognizer == nil)
+    {
+        self.tapOutsideSearchBarRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:searchBar action:@selector(resignFirstResponder)];
+    }
+    
+    [self.view addGestureRecognizer:self.tapOutsideSearchBarRecognizer];
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+    [self.view removeGestureRecognizer: self.tapOutsideSearchBarRecognizer];
+}
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
