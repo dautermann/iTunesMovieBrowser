@@ -8,10 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@interface SFImageView : UIImageView
+@property (strong) NSURL *imageURL;
+@end
+
 @interface SFSearchResultCell : UICollectionViewCell
 
 @property (weak) IBOutlet UILabel *nameLabel;
 @property (weak) IBOutlet UILabel *yearAndDirectorLabel;
-@property (weak) IBOutlet UIImageView *posterImageView;
+
+- (void) setPosterImageToURL: (NSURL *)imageURL;
 
 @end

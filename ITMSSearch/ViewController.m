@@ -7,8 +7,10 @@
 //
 
 #import "ViewController.h"
+#import "NSDate+Extension.h"
 #import "SFSearchResultCell.h"
 #import "MovieObject.h"
+#import "DetailViewController.h"
 
 @interface ViewController ()
 
@@ -20,6 +22,7 @@
 // approaches and philosophies.  What is your preference??
 @property (strong) NSURLSessionDataTask *searchTask;
 @property (strong) NSArray *movieArray;
+@property (weak) IBOutlet UICollectionView *movieCollectionView;
 
 @end
 
@@ -28,7 +31,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,6 +46,24 @@
     {
         [self.searchTask cancel];
         self.searchTask = nil;
+    }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Make sure your segue name in storyboard is the same as this line
+    if ([[segue identifier] isEqualToString:@"ShowDetail"])
+    {
+        [[self navigationController] setNavigationBarHidden:NO animated:YES];
+
+        NSArray *indexPaths = [self.movieCollectionView indexPathsForSelectedItems];
+        NSIndexPath *selectedCell = indexPaths[0];
+        
+        // Get reference to the destination view controller
+        DetailViewController *vc = [segue destinationViewController];
+        
+        // Pass any objects to the view controller here, like...
+        vc.movieObjectToDisplay = [self.movieArray objectAtIndex:selectedCell.row];
     }
 }
 
@@ -82,6 +107,10 @@
                 
                 // replace mutable with immutable ; we won't make any changes to the array
                 self.movieArray = movieObjectMutableArray;
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.movieCollectionView reloadData];
+                });
             }
         }
 
@@ -106,14 +135,20 @@
     
     MovieObject *movieObject = [self.movieArray objectAtIndex:indexPath.row];
     
-    // probably move this logic into a movie object
-//    NSString *dateString = movieDictionary[@"releaseDate"];
-    
     cell.nameLabel.text = movieObject.name;
     
-//    cell.yearAndDirectorLabel = [NSString stringWithFormat:@"%@ %@", yearString, [movieDictionary[@"artistName"]];
+    cell.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [movieObject.releaseDate yearAsString], movieObject.director];
+    
+    [cell setPosterImageToURL:movieObject.posterSmallURL];
     
     return cell;
+}
+
+#pragma mark collection view delegate methods
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"ShowDetail" sender:self];
 }
 
 @end

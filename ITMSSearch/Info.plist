@@ -41,5 +41,57 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSExceptionDomains</key>
+        <dict>
+            <key>apple.com</key>
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+                <key>NSExceptionAllowInsecureHTTPSLoads</key>
+                <true/>
+                <key>NSExceptionMinimumTLSVersion</key>
+                <string>TLSv1.2</string>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <true/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSRequiresCertificateTransparency</key>
+                <false/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSThirdPartyExceptionAllowInsecureHTTPSLoads</key>
+                <true/>
+                <key>NSThirdPartyExceptionMinimumTLSVersion</key>
+                <string>TLSv1.2</string>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <true/>
+            </dict>
+            <key>mzstatic.com</key>
+            <dict>
+                <key>NSAllowsArbitraryLoads</key>
+                <true/>
+                <key>NSExceptionAllowInsecureHTTPSLoads</key>
+                <true/>
+                <key>NSExceptionMinimumTLSVersion</key>
+                <string>TLSv1.2</string>
+                <key>NSExceptionRequiresForwardSecrecy</key>
+                <true/>
+                <key>NSIncludesSubdomains</key>
+                <true/>
+                <key>NSRequiresCertificateTransparency</key>
+                <false/>
+                <key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+                <true/>
+                <key>NSThirdPartyExceptionAllowInsecureHTTPSLoads</key>
+                <true/>
+                <key>NSThirdPartyExceptionMinimumTLSVersion</key>
+                <string>TLSv1.2</string>
+                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
 </dict>
 </plist>
