@@ -15,6 +15,7 @@
 @property (weak) IBOutlet SFImageView *bigPosterImageView;
 
 @property (weak) IBOutlet UILabel *movieNameLabel;
+@property (weak) IBOutlet UITextView *movieDescriptionView;
 
 @end
 
@@ -36,6 +37,7 @@
     
     self.movieNameLabel.text = self.movieObjectToDisplay.name;
     self.bigPosterImageView.imageURL = self.movieObjectToDisplay.posterBigURL;
+    self.movieDescriptionView.text = self.movieObjectToDisplay.longDescription;
     
     [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterBigURL intoImageView:self.bigPosterImageView];
 }

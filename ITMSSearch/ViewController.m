@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import "NSDate+Extension.h"
 #import "SFSearchResultCell.h"
 #import "MovieObject.h"
 #import "DetailViewController.h"
@@ -134,12 +133,10 @@
     SFSearchResultCell *cell = (SFSearchResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SFSearchResultCell" forIndexPath:indexPath];
     
     MovieObject *movieObject = [self.movieArray objectAtIndex:indexPath.row];
-    
-    cell.nameLabel.text = movieObject.name;
-    
-    cell.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [movieObject.releaseDate yearAsString], movieObject.director];
-    
-    [cell setPosterImageToURL:movieObject.posterSmallURL];
+
+    // since the cell needs to retain a copy of MovieObject (for setting/unsetting favorites),
+    // we'll just do all the outlet setting in there via this call:
+    [cell setCellToMovieObject:movieObject];
     
     return cell;
 }

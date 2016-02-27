@@ -8,6 +8,7 @@
 
 #import "MovieObject.h"
 #import "NSDate+Extension.h"
+#import "ITMSSearch-Swift.h"
 #import <UIKit/UIKit.h>
 
 @interface MovieObject ()
@@ -32,6 +33,15 @@
         _director = movieDictionary[@"artistName"];
         _releaseDate = [NSDate dateWithString: movieDictionary[@"releaseDate"]];
         _posterSmallURL = [NSURL URLWithString: movieDictionary[@"artworkUrl100"]];
+        _longDescription = movieDictionary[@"longDescription"];
+        
+        NSNumber *trackIDNumber = movieDictionary[@"trackId"];
+        // I'm surprised trackId coming from ITMS is numeric; I would have expected it to be a UUID-like thing...
+        if(trackIDNumber!= nil)
+        {
+            _movieIDString = [trackIDNumber stringValue];
+            _isFavorite = [[MovieFavoritesController sharedInstance] isThisMovieAFavorite:_movieIDString];
+        }
         
         // I want a big poster
         //

@@ -50,9 +50,18 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLD-kf-zX3">
-                                                    <rect key="frame" x="120" y="162" width="46" height="30"/>
-                                                    <state key="normal" title="Favorite"/>
+                                                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLD-kf-zX3">
+                                                    <rect key="frame" x="138" y="158" width="36" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="36" id="PEE-Xe-Q8F"/>
+                                                        <constraint firstAttribute="width" constant="36" id="R8Z-sA-zkr"/>
+                                                    </constraints>
+                                                    <inset key="contentEdgeInsets" minX="6" minY="6" maxX="6" maxY="6"/>
+                                                    <state key="normal" image="favorite_off"/>
+                                                    <state key="selected" image="favorite_on"/>
+                                                    <connections>
+                                                        <action selector="favoriteButtonTouched:" destination="wLs-rV-o7g" eventType="touchDown" id="b8k-M2-fcH"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -74,6 +83,7 @@
                                         </constraints>
                                         <size key="customSize" width="180" height="200"/>
                                         <connections>
+                                            <outlet property="favoriteButton" destination="gLD-kf-zX3" id="QfR-UT-gFw"/>
                                             <outlet property="nameLabel" destination="GT8-mG-yZr" id="tOx-jk-dWv"/>
                                             <outlet property="posterImageView" destination="GL0-vF-WN2" id="lCb-US-nDi"/>
                                             <outlet property="yearAndDirectorLabel" destination="ZD0-PZ-OR7" id="gHe-ag-eob"/>
@@ -140,12 +150,19 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5i-7f-JLq">
-                                <rect key="frame" x="24" y="348" width="272" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B5i-7f-JLq">
+                                <rect key="frame" x="8" y="348" width="288" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="biH-9V-RwC">
+                                <rect key="frame" x="8" y="377" width="304" height="54"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -153,11 +170,15 @@
                             <constraint firstAttribute="trailingMargin" secondItem="B5i-7f-JLq" secondAttribute="trailing" constant="8" id="5nC-Xk-cMQ"/>
                             <constraint firstItem="njS-fL-nBG" firstAttribute="leading" secondItem="Bgi-nL-VAp" secondAttribute="leading" id="C6Y-wx-eUM"/>
                             <constraint firstItem="njS-fL-nBG" firstAttribute="centerY" secondItem="Bgi-nL-VAp" secondAttribute="centerY" id="D2l-8l-6pG"/>
+                            <constraint firstItem="biH-9V-RwC" firstAttribute="leading" secondItem="Bgi-nL-VAp" secondAttribute="leading" constant="8" id="Fhx-cY-RIZ"/>
                             <constraint firstItem="njS-fL-nBG" firstAttribute="centerX" secondItem="Bgi-nL-VAp" secondAttribute="centerX" id="Kgp-CM-5xI"/>
-                            <constraint firstItem="B5i-7f-JLq" firstAttribute="leading" secondItem="Bgi-nL-VAp" secondAttribute="leadingMargin" constant="8" id="Mlz-E1-MOI"/>
+                            <constraint firstItem="B5i-7f-JLq" firstAttribute="leading" secondItem="Bgi-nL-VAp" secondAttribute="leading" constant="8" id="Mlz-E1-MOI"/>
                             <constraint firstItem="B5i-7f-JLq" firstAttribute="top" secondItem="njS-fL-nBG" secondAttribute="bottom" constant="8" id="NyK-Ck-xqN"/>
                             <constraint firstItem="njS-fL-nBG" firstAttribute="top" secondItem="KDX-CQ-0I2" secondAttribute="bottom" id="RRm-e2-CHK"/>
+                            <constraint firstAttribute="trailing" secondItem="biH-9V-RwC" secondAttribute="trailing" constant="8" id="TeM-au-XK0"/>
                             <constraint firstItem="njS-fL-nBG" firstAttribute="top" secondItem="Bgi-nL-VAp" secondAttribute="topMargin" constant="100" id="VDi-JB-fDK"/>
+                            <constraint firstItem="biH-9V-RwC" firstAttribute="top" secondItem="B5i-7f-JLq" secondAttribute="bottom" constant="8" id="app-6A-kWa"/>
+                            <constraint firstItem="tjE-Cr-Ohb" firstAttribute="top" secondItem="biH-9V-RwC" secondAttribute="bottom" id="cyU-6w-bmS"/>
                             <constraint firstAttribute="trailing" secondItem="njS-fL-nBG" secondAttribute="trailing" id="fGi-iI-7aG"/>
                             <constraint firstItem="njS-fL-nBG" firstAttribute="leading" secondItem="Bgi-nL-VAp" secondAttribute="leadingMargin" constant="200" id="mnU-bD-8wO"/>
                         </constraints>
@@ -174,6 +195,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="bigPosterImageView" destination="njS-fL-nBG" id="MYG-wv-o7U"/>
+                        <outlet property="movieDescriptionView" destination="biH-9V-RwC" id="9T4-Sb-utv"/>
                         <outlet property="movieNameLabel" destination="B5i-7f-JLq" id="7wA-aT-tEs"/>
                     </connections>
                 </viewController>
@@ -219,6 +241,10 @@
             <point key="canvasLocation" x="2755" y="429"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="favorite_off" width="128" height="128"/>
+        <image name="favorite_on" width="128" height="121"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3ys-fo-O4O"/>
     </inferredMetricsTieBreakers>

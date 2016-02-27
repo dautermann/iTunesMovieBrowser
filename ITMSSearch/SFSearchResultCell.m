@@ -8,10 +8,17 @@
 
 #import "SFSearchResultCell.h"
 #import "UIImage+Extension.h"
+#import "NSDate+Extension.h"
 #import "ITMSSearch-Swift.h"
 
 @interface SFSearchResultCell ()
+
 @property (weak) IBOutlet SFImageView *posterImageView;
+@property (weak) IBOutlet UIButton *favoriteButton;
+@property (weak) IBOutlet UILabel *nameLabel;
+@property (weak) IBOutlet UILabel *yearAndDirectorLabel;
+
+@property (strong) MovieObject *movieObject; // what we're currently rendering
 @end
 
 @implementation SFImageView
@@ -30,11 +37,43 @@
     [self.posterImageView removeObserver:self forKeyPath:@"image"];
 }
 
+- (void) prepareForReuse
+{
+    self.favoriteButton.selected = NO;
+
+    self.posterImageView.imageURL = nil;
+}
+
 - (void) setPosterImageToURL: (NSURL *)imageURL
 {
     self.posterImageView.imageURL = imageURL;
 
     [[PhotoBrowserCache sharedInstance] performGetPhoto:imageURL intoImageView:self.posterImageView];
+}
+
+- (void) setCellToMovieObject:(MovieObject *)moToSet
+{
+    self.movieObject = moToSet;
+    
+    self.nameLabel.text = moToSet.name;
+    
+    self.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [moToSet.releaseDate yearAsString], moToSet.director];
+    
+    self.favoriteButton.selected = moToSet.isFavorite;
+    
+    [self setPosterImageToURL:moToSet.posterSmallURL];
+}
+
+- (IBAction)favoriteButtonTouched:(id)sender
+{
+    if (self.favoriteButton.selected == NO)
+    {
+        [[MovieFavoritesController sharedInstance] addMovieID:self.movieObject.movieIDString];
+        self.favoriteButton.selected = YES;
+    } else {
+        [[MovieFavoritesController sharedInstance] removeMovieID:self.movieObject.movieIDString];
+        self.favoriteButton.selected = NO;
+    }
 }
 
 // Bells & whistles like this are fun to do, but I wish I knew if

@@ -14,10 +14,12 @@
 // the init method does all the setting
 @property (strong, readonly) NSString *name;
 @property (strong, readonly) NSString *director;
+@property (strong, readonly) NSString *movieIDString; // it's imported and converted from a NSNumber
 @property (strong, readonly) NSDate *releaseDate;
 @property (strong, readonly) NSURL *posterSmallURL;
-@property (strong, readonly) NSURL *posterMediumURL;
 @property (strong, readonly) NSURL *posterBigURL;
+@property (strong, readonly) NSString *longDescription;
+@property (readwrite) BOOL isFavorite;
 
 - (instancetype) initWithDictionary: (NSDictionary *) movieDict;
 

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		255A064C1C81D2B300F661C0 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A064B1C81D2B300F661C0 /* UIImage+Extension.m */; };
 		255A064F1C81DAE700F661C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A064E1C81DAE700F661C0 /* DetailViewController.m */; };
+		255A06521C8203BD00F661C0 /* MovieFavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255A06511C8203BD00F661C0 /* MovieFavoritesController.swift */; };
 		2576A6B31C8181CC00819959 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B21C8181CC00819959 /* main.m */; };
 		2576A6B61C8181CC00819959 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B51C8181CC00819959 /* AppDelegate.m */; };
 		2576A6B91C8181CC00819959 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B81C8181CC00819959 /* ViewController.m */; };
@@ -37,6 +38,7 @@
 		255A064B1C81D2B300F661C0 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		255A064D1C81DAE700F661C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		255A064E1C81DAE700F661C0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		255A06511C8203BD00F661C0 /* MovieFavoritesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieFavoritesController.swift; sourceTree = "<group>"; };
 		2576A6AE1C8181CC00819959 /* ITMSSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITMSSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2576A6B21C8181CC00819959 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2576A6B41C8181CC00819959 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				2576A6B51C8181CC00819959 /* AppDelegate.m */,
 				255A064D1C81DAE700F661C0 /* DetailViewController.h */,
 				255A064E1C81DAE700F661C0 /* DetailViewController.m */,
+				255A06511C8203BD00F661C0 /* MovieFavoritesController.swift */,
 				2576A6DC1C81A66A00819959 /* MovieObject.h */,
 				2576A6DD1C81A66A00819959 /* MovieObject.m */,
 				25D78E3D1C81C6D600BD08A6 /* PhotoBrowserCache.swift */,
@@ -257,6 +260,7 @@
 				2576A6DE1C81A66A00819959 /* MovieObject.m in Sources */,
 				2576A6B61C8181CC00819959 /* AppDelegate.m in Sources */,
 				2576A6B31C8181CC00819959 /* main.m in Sources */,
+				255A06521C8203BD00F661C0 /* MovieFavoritesController.swift in Sources */,
 				255A064C1C81D2B300F661C0 /* UIImage+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

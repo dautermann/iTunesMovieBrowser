@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MovieObject.h"
 
 @interface SFImageView : UIImageView
 @property (strong) NSURL *imageURL;
@@ -14,9 +15,6 @@
 
 @interface SFSearchResultCell : UICollectionViewCell
 
-@property (weak) IBOutlet UILabel *nameLabel;
-@property (weak) IBOutlet UILabel *yearAndDirectorLabel;
-
-- (void) setPosterImageToURL: (NSURL *)imageURL;
+- (void) setCellToMovieObject: (MovieObject *)moToSet;
 
 @end
