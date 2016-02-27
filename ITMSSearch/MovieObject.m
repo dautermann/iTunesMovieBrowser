@@ -14,6 +14,7 @@
 @interface MovieObject ()
 
 @property (strong, readonly) UIImage *posterImage;
+@property (strong) NSURLSessionDataTask *fetchTask;
 
 @end
 
@@ -25,41 +26,91 @@
     self = [super init];
     if(self)
     {
-        // I actually prefer to use a property's underlying ivar in init methods
-        // for reasons listed in the "Don't Use Accessor Methods in Initializer Methods..." section
-        // of this apple documentation ->
-        // https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6
-        _name = movieDictionary[@"trackName"];
-        _director = movieDictionary[@"artistName"];
-        _releaseDate = [NSDate dateWithString: movieDictionary[@"releaseDate"]];
-        _posterSmallURL = [NSURL URLWithString: movieDictionary[@"artworkUrl100"]];
-        _longDescription = movieDictionary[@"longDescription"];
-        
         NSNumber *trackIDNumber = movieDictionary[@"trackId"];
         // I'm surprised trackId coming from ITMS is numeric; I would have expected it to be a UUID-like thing...
         if(trackIDNumber!= nil)
         {
             _movieIDString = [trackIDNumber stringValue];
-            _isFavorite = [[MovieFavoritesController sharedInstance] isThisMovieAFavorite:_movieIDString];
         }
         
-        // I want a big poster
-        //
-        // http://stackoverflow.com/questions/8781725/larger-itunes-search-api-images
-        NSMutableString *posterString = [[NSMutableString alloc] initWithString:movieDictionary[@"artworkUrl100"]];
-        if([posterString length] > 0)
-        {
-            [posterString replaceOccurrencesOfString:@"100x100" withString:@"600x600" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [posterString length])];
-            
-            _posterBigURL = [NSURL URLWithString: posterString];
-        }
+        [self populateMovieFieldsWith:movieDictionary];
     }
     return self;
 }
 
-- (UIImage *) thumbnailImage{
+- (instancetype) initWithMovieID: (NSString *)movieID
+{
+    self = [super init];
+    if(self)
+    {
+        _movieIDString = movieID;
+    }
+    return self;
+}
+
+- (void)populateMovieFieldsWith:(NSDictionary *)movieDictionary
+{
+    // I actually prefer to use a property's underlying ivar in init methods
+    // for reasons listed in the "Don't Use Accessor Methods in Initializer Methods..." section
+    // of this apple documentation ->
+    // https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/MemoryMgmt/Articles/mmPractical.html#//apple_ref/doc/uid/TP40004447-SW6
+    //
+    // but also, more importantly, I purposefully set these properties to be publicly read-only.
+    //
+    // I suppose I could have set properties to readwrite &/or allowed setters in a private category extension.  Which do you guys prefer?
+
+    _name = movieDictionary[@"trackName"];
+    _director = movieDictionary[@"artistName"];
+    _releaseDate = [NSDate dateWithString: movieDictionary[@"releaseDate"]];
+    _posterSmallURL = [NSURL URLWithString: movieDictionary[@"artworkUrl100"]];
+    _longDescription = movieDictionary[@"longDescription"];
     
-    return nil;
+    _isFavorite = [[MovieFavoritesController sharedInstance] isThisMovieAFavorite:self.movieIDString];
+    
+    // I want a big poster
+    //
+    // http://stackoverflow.com/questions/8781725/larger-itunes-search-api-images
+    NSMutableString *posterString = [[NSMutableString alloc] initWithString:movieDictionary[@"artworkUrl100"]];
+    if([posterString length] > 0)
+    {
+        [posterString replaceOccurrencesOfString:@"100x100" withString:@"600x600" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [posterString length])];
+        
+        _posterBigURL = [NSURL URLWithString: posterString];
+    }
+}
+
+// yes, this is a duplicate of the code in the SearchViewController and it's
+// probably a super duper place to use a single function with a block for the completion
+- (void)fetchInformationAboutMovie
+{
+    NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/lookup?id=%@", self.movieIDString]];
+    self.fetchTask = [[NSURLSession sharedSession] dataTaskWithURL:urlToSearch completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError *error) {
+        
+        if (error != nil)
+        {
+            NSLog(@"error when trying to connect to %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
+        } else {
+            
+            NSDictionary *itmsResultDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
+            
+            if (error != nil)
+            {
+                NSLog(@"error when trying to deserialize data from %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
+            } else {
+                NSArray *rawMovieArray = itmsResultDict[@"results"];
+
+                // should only be one entry since we're looking up via ID
+                if ([rawMovieArray count] > 0)
+                {
+                    NSDictionary *movieDictionary = rawMovieArray[0];
+                    NSLog(@"movie dict is %@", movieDictionary);
+                    [self populateMovieFieldsWith:movieDictionary];
+                }
+            }
+        }
+    }];
+    
+    [self.fetchTask resume];
 }
 
 @end

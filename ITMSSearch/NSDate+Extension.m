@@ -29,7 +29,7 @@
 {
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:self];
     
-    return [NSString stringWithFormat:@"%ld", [components year]];
+    return [NSString stringWithFormat:@"%ld", (long)[components year]];
 }
 
 @end

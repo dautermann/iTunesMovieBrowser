@@ -25,6 +25,7 @@ class MovieFavoritesController: NSObject {
         
         super.init()
         
+        populateFavoriteSetIfNecessary()
     }
 
     func populateFavoriteSetIfNecessary()
@@ -48,8 +49,6 @@ class MovieFavoritesController: NSObject {
     
     func isThisMovieAFavorite(movieID : String) -> Bool
     {
-        populateFavoriteSetIfNecessary()
-        
         if let _ = favoriteSet?.indexOf(movieID)
         {
             return true
@@ -69,8 +68,6 @@ class MovieFavoritesController: NSObject {
     
     func addMovieID(movieID : String)
     {
-        populateFavoriteSetIfNecessary()
-
         favoriteSet?.insert(movieID)
         
         updateToDisk()
@@ -78,11 +75,14 @@ class MovieFavoritesController: NSObject {
     
     func removeMovieID(movieID : String)
     {
-        populateFavoriteSetIfNecessary()
-        
         favoriteSet?.remove(movieID)
         
         updateToDisk()
+    }
+    
+    func getAllFavorites() -> Set<String>?
+    {
+        return favoriteSet
     }
     
 }

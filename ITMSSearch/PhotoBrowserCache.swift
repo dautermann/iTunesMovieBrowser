@@ -16,6 +16,8 @@ import UIKit
     var cacheFolderURL : NSURL
     
     var urlSession : NSURLSession
+    
+    var visibleAlertController : UIAlertController?
 
     // http://krakendev.io/blog/the-right-way-to-write-a-singleton
     private override init() {
@@ -95,9 +97,18 @@ import UIKit
                 
                 if let mainwindow = UIApplication.sharedApplication().delegate!.window
                 {
-                    let alert = UIAlertController(title: "Alert", message: "Didn't get a picture back", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
-                    mainwindow!.rootViewController!.presentViewController(alert, animated: true, completion: nil)
+                    if self.visibleAlertController == nil
+                    {
+                        self.visibleAlertController = UIAlertController(title: "Alert", message: "Didn't get a picture back", preferredStyle: UIAlertControllerStyle.Alert)
+                        if let alertController = self.visibleAlertController
+                        {
+                            alertController.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default)
+                            { action -> Void in
+                                self.visibleAlertController = nil
+                            })
+                            mainwindow!.rootViewController!.presentViewController(alertController, animated: true, completion: nil)
+                        }
+                    }
                 }
             }
         })

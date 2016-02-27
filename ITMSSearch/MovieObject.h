@@ -21,6 +21,10 @@
 @property (strong, readonly) NSString *longDescription;
 @property (readwrite) BOOL isFavorite;
 
+- (void)fetchInformationAboutMovie;
+
 - (instancetype) initWithDictionary: (NSDictionary *) movieDict;
+- (instancetype) initWithMovieID: (NSString *)movieID;
+
 
 @end

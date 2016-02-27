@@ -20,8 +20,6 @@
 // but every company I've ever worked at has different
 // approaches and philosophies.  What is your preference??
 @property (strong) NSURLSessionDataTask *searchTask;
-@property (strong) NSArray *movieArray;
-@property (weak) IBOutlet UICollectionView *movieCollectionView;
 
 // useful to dismiss the keyboard
 @property (strong) UIGestureRecognizer *tapOutsideSearchBarRecognizer;
@@ -56,7 +54,7 @@
     // Make sure your segue name in storyboard is the same as this line
     if ([[segue identifier] isEqualToString:@"ShowDetail"])
     {
-        [[self navigationController] setNavigationBarHidden:NO animated:YES];
+        [[self navigationController] setNavigationBarHidden:NO animated:NO];
 
         NSArray *indexPaths = [self.movieCollectionView indexPathsForSelectedItems];
         NSIndexPath *selectedCell = indexPaths[0];
@@ -102,17 +100,19 @@
         if (error != nil)
         {
             NSLog(@"error when trying to connect to %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
+       
         } else {
             
             NSDictionary *itmsResultDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-            NSArray *rawMovieArray = itmsResultDict[@"results"];
-
-            NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity: [rawMovieArray count]];
             if (error != nil)
             {
                 NSLog(@"error when trying to deserialize data from %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
             } else {
-                NSLog(@"movieArray is %ld", [rawMovieArray count]);
+                NSArray *rawMovieArray = itmsResultDict[@"results"];
+                
+                NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity: [rawMovieArray count]];
+
+                NSLog(@"movieArray is %ld", (unsigned long)[rawMovieArray count]);
                 
                 NSLog(@"%@", rawMovieArray);
                 
@@ -163,6 +163,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    //[self.navigationController performSegueWithIdentifier:@"ShowDetail" sender:self];
     [self performSegueWithIdentifier:@"ShowDetail" sender:self];
 }
 

@@ -10,6 +10,8 @@
 
 @interface ViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
 
+@property (strong) NSArray *movieArray;
+@property (weak) IBOutlet UICollectionView *movieCollectionView;
 
 @end
 
