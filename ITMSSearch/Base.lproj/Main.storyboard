@@ -346,7 +346,7 @@
         <scene sceneID="5e5-0V-KFG">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="W7U-wY-U94" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" id="Vix-H5-h60"/>
+                    <tabBarItem key="tabBarItem" title="Search" image="search" selectedImage="search" id="Vix-H5-h60"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LqL-gx-YgH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -365,7 +365,7 @@
         <scene sceneID="2I7-q6-Oak">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="sKs-Zk-bEf" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Favorites" id="MyL-yV-ndA"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" image="favorite" selectedImage="favorite" id="MyL-yV-ndA"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Ff6-1J-D0A">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -382,8 +382,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="favorite" width="128" height="128"/>
         <image name="favorite_off" width="128" height="128"/>
         <image name="favorite_on" width="128" height="121"/>
+        <image name="search" width="128" height="128"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="3ys-fo-O4O"/>

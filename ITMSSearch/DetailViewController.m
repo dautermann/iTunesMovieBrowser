@@ -48,9 +48,13 @@
 
 - (void)goBack:(UITapGestureRecognizer *)recognizer
 {
-    NSLog(@"navigation controller is %@", self.navigationController);
-    
-    [self.navigationController popViewControllerAnimated:YES];
+    // I am really sorry for this not optimal behavior
+    if ( self.navigationController == nil )
+    {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /*
