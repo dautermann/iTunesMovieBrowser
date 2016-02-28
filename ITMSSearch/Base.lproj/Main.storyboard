@@ -125,6 +125,7 @@
                     <navigationItem key="navigationItem" id="dks-MB-asL"/>
                     <connections>
                         <outlet property="movieCollectionView" destination="nXZ-rv-4PT" id="TRe-t3-ecv"/>
+                        <outlet property="noMoviesVisibleLabel" destination="lDp-ok-d6F" id="54c-6K-MBa"/>
                         <segue destination="yCq-MT-jDQ" kind="show" identifier="ShowDetail" id="3ys-fo-O4O"/>
                     </connections>
                 </viewController>

@@ -24,6 +24,8 @@
 // useful to dismiss the keyboard
 @property (strong) UIGestureRecognizer *tapOutsideSearchBarRecognizer;
 
+@property (weak) IBOutlet UILabel *noMoviesVisibleLabel;
+
 @end
 
 @implementation ViewController
@@ -126,6 +128,11 @@
                 self.movieArray = movieObjectMutableArray;
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    if ([self.movieArray count] > 0)
+                    {
+                        self.noMoviesVisibleLabel.hidden = YES;
+                    }
                     [self.movieCollectionView reloadData];
                 });
             }
@@ -133,7 +140,6 @@
 
     }];
     
-    NSLog(@"supposedly starting self.searchTask %@", self.searchTask);
     [self.searchTask resume];
 }
 

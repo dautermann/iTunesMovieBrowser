@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "MovieObject.h"
 
 @interface ITMSSearchTests : XCTestCase
 
@@ -27,6 +28,13 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
+}
+
+- (void)testCreateMovieObject {
+    NSDictionary *testMovieDictionary = @{ @"trackId" : @978943481, @"trackName" : @"Hardware Wars", @"releaseDate" : @"1977-05-25T07:00:00Z"};
+    MovieObject *movieObject = [[MovieObject alloc] initWithDictionary:testMovieDictionary];
+    
+    XCTAssert([movieObject.name isEqualToString:testMovieDictionary[@"trackName"]], "movieName isn't what we expected");
 }
 
 - (void)testPerformanceExample {

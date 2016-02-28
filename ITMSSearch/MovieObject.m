@@ -70,7 +70,7 @@
     // I want a big poster
     //
     // http://stackoverflow.com/questions/8781725/larger-itunes-search-api-images
-    NSMutableString *posterString = [[NSMutableString alloc] initWithString:movieDictionary[@"artworkUrl100"]];
+    NSMutableString *posterString = [[NSMutableString alloc] initWithString:movieDictionary[@"artworkUrl100"] ? movieDictionary[@"artworkUrl100"] : @""];
     if([posterString length] > 0)
     {
         [posterString replaceOccurrencesOfString:@"100x100" withString:@"600x600" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [posterString length])];
