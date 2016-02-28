@@ -14,6 +14,8 @@
 
 @interface FavoritesViewController ()
 
+@property (strong) NSSet *currentFavoritesSet;
+
 @end
 
 @implementation FavoritesViewController
@@ -28,14 +30,11 @@
     return self;
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    self.currentFavoritesSet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -47,18 +46,26 @@
 - (void)updateFavoritesView
 {
     NSSet *favoriteSet = [[MovieFavoritesController sharedInstance] getAllFavorites];
-    NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity: [favoriteSet count]];
     
-    for (NSString *movieID in favoriteSet)
+    if (favoriteSet != self.currentFavoritesSet)
     {
-        MovieObject *newObject = [[MovieObject alloc] initWithMovieID:movieID];
-        [newObject fetchInformationAboutMovie];
-        [movieObjectMutableArray addObject: newObject];
+        self.currentFavoritesSet = favoriteSet;
+        
+        NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity: [favoriteSet count]];
+        
+        for (NSString *movieID in favoriteSet)
+        {
+            MovieObject *newObject = [[MovieObject alloc] initWithMovieID:movieID];
+            [newObject fetchInformationAboutMovie];
+            [movieObjectMutableArray addObject: newObject];
+        }
+        
+        self.movieArray = movieObjectMutableArray;
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.movieCollectionView reloadData];
+        });
     }
-    
-    self.movieArray = movieObjectMutableArray;
-    
-    [self.movieCollectionView reloadData];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -70,6 +77,11 @@
     cell.favoriteButton.hidden = YES;
     
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self performSegueWithIdentifier:@"ShowDetail2" sender:self];
 }
 
 /*

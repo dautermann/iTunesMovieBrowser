@@ -9,7 +9,7 @@
 #import "MovieObject.h"
 #import "NSDate+Extension.h"
 #import "ITMSSearch-Swift.h"
-#import <UIKit/UIKit.h>
+#import "SFSearchResultCell.h"
 
 @interface MovieObject ()
 
@@ -77,6 +77,8 @@
         
         _posterBigURL = [NSURL URLWithString: posterString];
     }
+    
+    [self.collectionViewCell setCellToMovieObject:self];
 }
 
 // yes, this is a duplicate of the code in the SearchViewController and it's

@@ -53,8 +53,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Make sure your segue name in storyboard is the same as this line
-    if ([[segue identifier] isEqualToString:@"ShowDetail"])
+    if ([[segue identifier] compare:@"ShowDetail" options:NSCaseInsensitiveSearch range:NSMakeRange(0,10)] == NSOrderedSame)
     {
         [[self navigationController] setNavigationBarHidden:NO animated:NO];
 
@@ -169,7 +168,6 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    //[self.navigationController performSegueWithIdentifier:@"ShowDetail" sender:self];
     [self performSegueWithIdentifier:@"ShowDetail" sender:self];
 }
 

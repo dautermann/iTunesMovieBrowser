@@ -317,7 +317,7 @@
                     <navigationItem key="navigationItem" id="mqv-M8-rAj"/>
                     <connections>
                         <outlet property="movieCollectionView" destination="7O6-Uj-Tee" id="ZZp-BG-yGz"/>
-                        <segue destination="yCq-MT-jDQ" kind="show" identifier="ShowDetail" action="showDetailViewController:sender:" id="ZY6-M4-pMl"/>
+                        <segue destination="yCq-MT-jDQ" kind="show" identifier="ShowDetail2" id="f5M-eS-kTu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xv9-Js-0cD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -382,12 +382,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="favorite" width="128" height="128"/>
+        <image name="favorite" width="45" height="45"/>
         <image name="favorite_off" width="128" height="128"/>
         <image name="favorite_on" width="128" height="121"/>
-        <image name="search" width="128" height="128"/>
+        <image name="search" width="45" height="45"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3ys-fo-O4O"/>
+        <segue reference="f5M-eS-kTu"/>
     </inferredMetricsTieBreakers>
 </document>

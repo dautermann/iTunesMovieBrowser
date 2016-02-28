@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "MovieObject.h"
+#import "NSDate+Extension.h"
 
 @interface ITMSSearchTests : XCTestCase
 
@@ -35,6 +36,20 @@
     MovieObject *movieObject = [[MovieObject alloc] initWithDictionary:testMovieDictionary];
     
     XCTAssert([movieObject.name isEqualToString:testMovieDictionary[@"trackName"]], "movieName isn't what we expected");
+    
+    NSDate *releaseDate = [NSDate dateWithString:testMovieDictionary[@"releaseDate"]];
+    XCTAssertEqual([movieObject.releaseDate timeIntervalSinceReferenceDate], [releaseDate timeIntervalSinceReferenceDate], "release date should be equal");
+}
+
+- (void)testDatesInMovieObject {
+    NSDictionary *testMovieDictionary = @{ @"trackId" : @978943481, @"trackName" : @"Hardware Wars", @"releaseDate" : @"I am up to no good T07:00:00Z"};
+    MovieObject *movieObject = [[MovieObject alloc] initWithDictionary:testMovieDictionary];
+    
+    XCTAssertNil(movieObject.releaseDate, "release date should be nil");
+    
+    testMovieDictionary = @{ @"trackId" : @978945481, @"trackName" : @"Some Other Movie"};
+    
+    XCTAssertNil(movieObject.releaseDate, "release date should be nil");
 }
 
 - (void)testPerformanceExample {

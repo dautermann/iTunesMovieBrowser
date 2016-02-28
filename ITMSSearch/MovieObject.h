@@ -6,7 +6,9 @@
 //  Copyright © 2016 Michael Dautermann. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@class SFSearchResultCell;
 
 @interface MovieObject : NSObject
 
@@ -20,6 +22,7 @@
 @property (strong, readonly) NSURL *posterBigURL;
 @property (strong, readonly) NSString *longDescription;
 @property (readwrite) BOOL isFavorite;
+@property (weak) SFSearchResultCell *collectionViewCell;
 
 - (void)fetchInformationAboutMovie;
 
