@@ -10,6 +10,7 @@
 #import "ITMSSearch-Swift.h"
 #import "MovieObject.h"
 #import "DetailViewController.h"
+#import "SFSearchResultCell.h"
 
 @interface FavoritesViewController ()
 
@@ -58,6 +59,17 @@
     self.movieArray = movieObjectMutableArray;
     
     [self.movieCollectionView reloadData];
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    SFSearchResultCell *cell = (SFSearchResultCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
+    // would be nice to allow unfavoriting a cell from within the Favorites View,
+    // but we can do that a little later...
+    cell.favoriteButton.hidden = YES;
+    
+    return cell;
 }
 
 /*

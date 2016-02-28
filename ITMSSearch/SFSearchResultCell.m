@@ -14,7 +14,6 @@
 @interface SFSearchResultCell ()
 
 @property (weak) IBOutlet SFImageView *posterImageView;
-@property (weak) IBOutlet UIButton *favoriteButton;
 @property (weak) IBOutlet UILabel *nameLabel;
 @property (weak) IBOutlet UILabel *yearAndDirectorLabel;
 

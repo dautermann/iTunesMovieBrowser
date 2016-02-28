@@ -15,6 +15,8 @@
 
 @interface SFSearchResultCell : UICollectionViewCell
 
+@property (weak) IBOutlet UIButton *favoriteButton;
+
 - (void) setCellToMovieObject: (MovieObject *)moToSet;
 
 @end
