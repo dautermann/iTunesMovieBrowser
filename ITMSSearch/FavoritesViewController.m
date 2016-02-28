@@ -30,7 +30,6 @@
     return self;
 }
 
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -72,10 +71,11 @@
 {
     SFSearchResultCell *cell = (SFSearchResultCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
+#if ALMOST_THERE
     // would be nice to allow unfavoriting a cell from within the Favorites View,
     // but we can do that a little later...
     cell.favoriteButton.hidden = YES;
-    
+#endif
     return cell;
 }
 
@@ -83,15 +83,5 @@
 {
     [self performSegueWithIdentifier:@"ShowDetail2" sender:self];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

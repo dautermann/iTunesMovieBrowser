@@ -77,8 +77,6 @@
         
         _posterBigURL = [NSURL URLWithString: posterString];
     }
-    
-    [self.collectionViewCell setCellToMovieObject:self];
 }
 
 // yes, this is a duplicate of the code in the SearchViewController and it's

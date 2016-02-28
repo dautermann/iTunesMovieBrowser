@@ -22,7 +22,6 @@
 @property (strong, readonly) NSURL *posterBigURL;
 @property (strong, readonly) NSString *longDescription;
 @property (readwrite) BOOL isFavorite;
-@property (weak) SFSearchResultCell *collectionViewCell;
 
 - (void)fetchInformationAboutMovie;
 

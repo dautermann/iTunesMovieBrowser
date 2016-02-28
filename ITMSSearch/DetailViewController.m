@@ -25,8 +25,6 @@
     [super viewDidLoad];
     
     self.bigPosterImageView.userInteractionEnabled = YES;
-    UITapGestureRecognizer *tapGestureRecogznier = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack:)];
-    [self.bigPosterImageView addGestureRecognizer:tapGestureRecogznier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,26 +43,5 @@
     
     [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterBigURL intoImageView:self.bigPosterImageView];
 }
-
-- (void)goBack:(UITapGestureRecognizer *)recognizer
-{
-    // I am really sorry for this not optimal behavior
-    if ( self.navigationController == nil )
-    {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    } else {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

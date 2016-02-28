@@ -55,17 +55,17 @@
 {
     self.movieObject = moToSet;
  
-    self.movieObject.collectionViewCell = self;
-
     if ([moToSet.name length] > 0)
     {
-        self.nameLabel.text = moToSet.name;
-        
-        self.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [moToSet.releaseDate yearAsString], moToSet.director];
-        
-        self.favoriteButton.selected = moToSet.isFavorite;
-        
-        [self setPosterImageToURL:moToSet.posterSmallURL];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.nameLabel.text = moToSet.name;
+            
+            self.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [moToSet.releaseDate yearAsString], moToSet.director];
+            
+            self.favoriteButton.selected = moToSet.isFavorite;
+            
+            [self setPosterImageToURL:moToSet.posterSmallURL];
+        });
     }
 }
 
@@ -75,10 +75,15 @@
     {
         [[MovieFavoritesController sharedInstance] addMovieID:self.movieObject.movieIDString];
         self.favoriteButton.selected = YES;
+        self.movieObject.isFavorite = YES;
     } else {
         [[MovieFavoritesController sharedInstance] removeMovieID:self.movieObject.movieIDString];
         self.favoriteButton.selected = NO;
+        self.movieObject.isFavorite = NO;
     }
+    
+    // I want to add a notification here to tell observers
+    // that this movie object's favorite status has changed
 }
 
 // Bells & whistles like this are fun to do, but I wish I knew if
@@ -106,7 +111,8 @@
 {
     // this code attempts to set a contrasting text color based on the average color of the image
     UIColor *averageColor = [imageToAverage averageColor];
-    UIColor *textColor = [averageColor blackOrWhiteContrastingColor];    
+    UIColor *textColor = [averageColor blackOrWhiteContrastingColor];
+
     self.nameLabel.textColor = textColor;
     self.yearAndDirectorLabel.textColor = textColor;
 }
