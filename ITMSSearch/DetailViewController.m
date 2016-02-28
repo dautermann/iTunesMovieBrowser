@@ -23,7 +23,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    self.bigPosterImageView.userInteractionEnabled = YES;
+    UITapGestureRecognizer *tapGestureRecogznier = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(goBack:)];
+    [self.bigPosterImageView addGestureRecognizer:tapGestureRecogznier];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,6 +44,13 @@
     self.movieDescriptionView.text = self.movieObjectToDisplay.longDescription;
     
     [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterBigURL intoImageView:self.bigPosterImageView];
+}
+
+- (void)goBack:(UITapGestureRecognizer *)recognizer
+{
+    NSLog(@"navigation controller is %@", self.navigationController);
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /*

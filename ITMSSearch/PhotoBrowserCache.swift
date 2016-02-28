@@ -64,7 +64,6 @@ import UIKit
             
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 imageView.image = image
-                imageView.userInteractionEnabled = false
             })
         }
 

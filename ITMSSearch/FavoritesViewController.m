@@ -9,6 +9,7 @@
 #import "FavoritesViewController.h"
 #import "ITMSSearch-Swift.h"
 #import "MovieObject.h"
+#import "DetailViewController.h"
 
 @interface FavoritesViewController ()
 
