@@ -50,6 +50,8 @@
         [self.searchTask cancel];
         self.searchTask = nil;
     }
+    
+    // we should probably empty out the movie array and/or collection view, too...
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
