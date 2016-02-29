@@ -19,13 +19,15 @@
 
 @implementation DetailViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    
+
     self.bigPosterImageView.userInteractionEnabled = YES;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -34,13 +36,13 @@
 {
     [self.navigationController setNavigationBarHidden:NO];
     [super viewWillAppear:animated];
-    
+
     self.navigationItem.title = self.movieObjectToDisplay.name;
     self.bigPosterImageView.imageURL = self.movieObjectToDisplay.posterBigURL;
     self.movieDescriptionView.text = self.movieObjectToDisplay.longDescription;
-    
+
     self.descriptionTextViewHeight.constant = [self.movieDescriptionView sizeThatFits:CGSizeMake(self.movieDescriptionView.frame.size.width, CGFLOAT_MAX)].height;
-    
+
     [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterBigURL intoImageView:self.bigPosterImageView];
 }
 

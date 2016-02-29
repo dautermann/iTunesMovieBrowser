@@ -14,4 +14,3 @@
 @property (weak) IBOutlet UICollectionView *movieCollectionView;
 
 @end
-

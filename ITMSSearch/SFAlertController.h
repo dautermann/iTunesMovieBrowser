@@ -12,6 +12,6 @@
 
 + (id)sharedInstance;
 
-- (BOOL) displayAlertIfPossible: (NSString *)alertString;
+- (BOOL)displayAlertIfPossible:(NSString *)alertString;
 
 @end

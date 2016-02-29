@@ -10,6 +10,6 @@
 
 @interface UIColor (Extension)
 
-- (UIColor*)blackOrWhiteContrastingColor;
+- (UIColor *)blackOrWhiteContrastingColor;
 
 @end

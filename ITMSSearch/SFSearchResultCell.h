@@ -17,7 +17,7 @@
 
 @property (weak) IBOutlet UIButton *favoriteButton;
 
-- (void) configureCell;
-- (void) setCellToMovieObject: (MovieObject *)moToSet;
+- (void)configureCell;
+- (void)setCellToMovieObject:(MovieObject *)moToSet;
 
 @end

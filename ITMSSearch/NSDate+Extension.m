@@ -10,7 +10,7 @@
 
 @implementation NSDate (NSDate_Extension)
 
-+ (NSDate *) dateWithString: (NSString *)dateString
++ (NSDate *)dateWithString:(NSString *)dateString
 {
     // wish I could name this method as `dateFromString`, but there's a
     // deprecated method with the same name and I want better control
@@ -21,14 +21,14 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
 
     NSDate *dateToReturn = [dateFormatter dateFromString:dateString];
-    
+
     return dateToReturn;
 }
 
-- (NSString *) yearAsString
+- (NSString *)yearAsString
 {
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear fromDate:self];
-    
+
     return [NSString stringWithFormat:@"%ld", (long)[components year]];
 }
 

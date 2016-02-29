@@ -23,14 +23,15 @@
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
-    if(self)
+    if (self)
     {
         [self updateFavoritesView];
     }
     return self;
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
     self.currentFavoritesSet = nil;
@@ -45,22 +46,22 @@
 - (void)updateFavoritesView
 {
     NSSet *favoriteSet = [[MovieFavoritesController sharedInstance] getAllFavorites];
-    
+
     if (favoriteSet != self.currentFavoritesSet)
     {
         self.currentFavoritesSet = favoriteSet;
-        
-        NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity: [favoriteSet count]];
-        
+
+        NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity:[favoriteSet count]];
+
         for (NSString *movieID in favoriteSet)
         {
             MovieObject *newObject = [[MovieObject alloc] initWithMovieID:movieID];
             [newObject fetchInformationAboutMovie];
-            [movieObjectMutableArray addObject: newObject];
+            [movieObjectMutableArray addObject:newObject];
         }
-        
+
         self.movieArray = movieObjectMutableArray;
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.movieCollectionView reloadData];
         });
@@ -70,12 +71,11 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SFSearchResultCell *cell = (SFSearchResultCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    
-#if ALMOST_THERE
+
     // would be nice to allow unfavoriting a cell from within the Favorites View,
     // but we can do that a little later...
     cell.favoriteButton.hidden = YES;
-#endif
+
     return cell;
 }
 

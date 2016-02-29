@@ -22,27 +22,27 @@
 @implementation MovieObject
 
 // designated initializer
-- (instancetype) initWithDictionary: (NSDictionary *) movieDictionary
+- (instancetype)initWithDictionary:(NSDictionary *)movieDictionary
 {
     self = [super init];
-    if(self)
+    if (self)
     {
         NSNumber *trackIDNumber = movieDictionary[@"trackId"];
         // I'm surprised trackId coming from ITMS is numeric; I would have expected it to be a UUID-like thing...
-        if(trackIDNumber!= nil)
+        if (trackIDNumber != nil)
         {
             _movieIDString = [trackIDNumber stringValue];
         }
-        
+
         [self populateMovieFieldsWith:movieDictionary];
     }
     return self;
 }
 
-- (instancetype) initWithMovieID: (NSString *)movieID
+- (instancetype)initWithMovieID:(NSString *)movieID
 {
     self = [super init];
-    if(self)
+    if (self)
     {
         _movieIDString = movieID;
     }
@@ -62,21 +62,21 @@
 
     _name = movieDictionary[@"trackName"];
     _director = movieDictionary[@"artistName"];
-    _releaseDate = [NSDate dateWithString: movieDictionary[@"releaseDate"]];
-    _posterSmallURL = [NSURL URLWithString: movieDictionary[@"artworkUrl100"]];
+    _releaseDate = [NSDate dateWithString:movieDictionary[@"releaseDate"]];
+    _posterSmallURL = [NSURL URLWithString:movieDictionary[@"artworkUrl100"]];
     _longDescription = movieDictionary[@"longDescription"];
     _shortDescription = movieDictionary[@"shortDescription"]; // only for certain movies
     _isFavorite = [[MovieFavoritesController sharedInstance] isThisMovieAFavorite:self.movieIDString];
-    
+
     // I want a big poster
     //
     // http://stackoverflow.com/questions/8781725/larger-itunes-search-api-images
-    NSMutableString *posterString = [[NSMutableString alloc] initWithString:movieDictionary[@"artworkUrl100"] ? movieDictionary[@"artworkUrl100"] : @""];
-    if([posterString length] > 0)
+    NSMutableString *posterString = [[NSMutableString alloc] initWithString:movieDictionary[@"artworkUrl100"] ? movieDictionary[@"artworkUrl100"]:@""];
+    if ([posterString length] > 0)
     {
         [posterString replaceOccurrencesOfString:@"100x100" withString:@"600x600" options:NSCaseInsensitiveSearch range:NSMakeRange(0, [posterString length])];
-        
-        _posterBigURL = [NSURL URLWithString: posterString];
+
+        _posterBigURL = [NSURL URLWithString:posterString];
     }
 }
 
@@ -85,22 +85,23 @@
 - (void)fetchInformationAboutMovie
 {
     NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/lookup?id=%@", self.movieIDString]];
-    self.fetchTask = [[NSURLSession sharedSession] dataTaskWithURL:urlToSearch completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-        
+    self.fetchTask = [[NSURLSession sharedSession] dataTaskWithURL:urlToSearch completionHandler: ^(NSData *data, NSURLResponse *response, NSError *error) {
         if (error != nil)
         {
             NSLog(@"error when trying to connect to %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
-            [[SFAlertController sharedInstance] displayAlertIfPossible: [NSString stringWithFormat: @"error when trying to connect to server - %@", error.localizedDescription]];
-
-        } else {
-            
+            [[SFAlertController sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"error when trying to connect to server - %@", error.localizedDescription]];
+        }
+        else
+        {
             NSDictionary *itmsResultDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
-            
+
             if (error != nil)
             {
                 NSLog(@"error when trying to deserialize data from %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
-                [[SFAlertController sharedInstance] displayAlertIfPossible: [NSString stringWithFormat: @"can't decode response from server - %@", error.localizedDescription]];
-            } else {
+                [[SFAlertController sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"can't decode response from server - %@", error.localizedDescription]];
+            }
+            else
+            {
                 NSArray *rawMovieArray = itmsResultDict[@"results"];
 
                 // should only be one entry since we're looking up via ID
@@ -109,8 +110,8 @@
                     NSDictionary *movieDictionary = rawMovieArray[0];
                     // NSLog(@"movie dict is %@", movieDictionary);
                     [self populateMovieFieldsWith:movieDictionary];
-                    
-                    if (self.collectionCell != nil )
+
+                    if (self.collectionCell != nil)
                     {
                         [self.collectionCell configureCell];
                     }
@@ -118,7 +119,7 @@
             }
         }
     }];
-    
+
     [self.fetchTask resume];
 }
 

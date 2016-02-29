@@ -10,8 +10,8 @@
 
 @interface NSDate (NSDate_Extension)
 
-+ (NSDate *) dateWithString: (NSString *)dateString;
++ (NSDate *)dateWithString:(NSString *)dateString;
 
-- (NSString *) yearAsString;
+- (NSString *)yearAsString;
 
 @end
