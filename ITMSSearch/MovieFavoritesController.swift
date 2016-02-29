@@ -38,7 +38,6 @@ class MovieFavoritesController: NSObject {
             
             if let favoritesData = favoritesData {
                 favoriteSet = NSKeyedUnarchiver.unarchiveObjectWithData(favoritesData) as? Set<String>
-                print(favoriteSet)
                 return
             }
             

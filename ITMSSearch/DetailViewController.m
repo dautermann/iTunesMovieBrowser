@@ -13,10 +13,8 @@
 @interface DetailViewController ()
 
 @property (weak) IBOutlet SFImageView *bigPosterImageView;
-
-@property (weak) IBOutlet UILabel *movieNameLabel;
 @property (weak) IBOutlet UITextView *movieDescriptionView;
-
+@property (weak) IBOutlet NSLayoutConstraint *descriptionTextViewHeight;
 @end
 
 @implementation DetailViewController
@@ -37,9 +35,11 @@
     [self.navigationController setNavigationBarHidden:NO];
     [super viewWillAppear:animated];
     
-    self.movieNameLabel.text = self.movieObjectToDisplay.name;
+    self.navigationItem.title = self.movieObjectToDisplay.name;
     self.bigPosterImageView.imageURL = self.movieObjectToDisplay.posterBigURL;
     self.movieDescriptionView.text = self.movieObjectToDisplay.longDescription;
+    
+    self.descriptionTextViewHeight.constant = [self.movieDescriptionView sizeThatFits:CGSizeMake(self.movieDescriptionView.frame.size.width, CGFLOAT_MAX)].height;
     
     [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterBigURL intoImageView:self.bigPosterImageView];
 }

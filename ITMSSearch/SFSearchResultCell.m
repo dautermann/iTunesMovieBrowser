@@ -17,6 +17,7 @@
 @property (weak) IBOutlet SFImageView *posterImageView;
 @property (weak) IBOutlet UILabel *nameLabel;
 @property (weak) IBOutlet UILabel *yearAndDirectorLabel;
+@property (weak) IBOutlet UILabel *shortDescriptionLabel;
 
 @property (strong) MovieObject *movieObject; // what we're currently rendering
 @end
@@ -30,6 +31,8 @@
 - (void) awakeFromNib
 {
     [self registerSelfAsObserverForImageView];
+    
+    [self.posterImageView.layer setOpacity:0.6f];
 }
 
 - (void) dealloc
@@ -39,9 +42,18 @@
 
 - (void) prepareForReuse
 {
+    if (self.movieObject != nil)
+    {
+        // tell the about-to-be-forgotten movie object to forget about us
+        self.movieObject.collectionCell = nil;
+        // and forget the movie object (because we're about to get reused)
+        self.movieObject = nil;
+    }
     self.favoriteButton.selected = NO;
 
     self.posterImageView.imageURL = nil;
+    
+    self.posterImageView.image = nil;
 }
 
 - (void) setPosterImageToURL: (NSURL *)imageURL
@@ -51,22 +63,35 @@
     [[PhotoBrowserCache sharedInstance] performGetPhoto:imageURL intoImageView:self.posterImageView];
 }
 
+- (void) configureCell
+{
+    if ([self.movieObject.name length] > 0)
+    {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.nameLabel.text = self.movieObject.name;
+            
+            self.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [self.movieObject.releaseDate yearAsString], self.movieObject.director];
+            
+            self.shortDescriptionLabel.text = self.movieObject.shortDescription;
+            
+            self.favoriteButton.selected = self.movieObject.isFavorite;
+            
+            // the 100 x 100 simply looks too grainy to be sexy, so we'll use the BIG poster...
+            //
+            // the only issue might be on large iPads where a lot of images are on screen.
+            //
+            // if I see any memory warnings during extensive testing, I'd probably want to
+            // write a UIImage category to generate thumbnails directly from this big UIImage object
+            [self setPosterImageToURL:self.movieObject.posterBigURL];
+        });
+    }
+}
+
 - (void) setCellToMovieObject:(MovieObject *)moToSet
 {
     self.movieObject = moToSet;
- 
-    if ([moToSet.name length] > 0)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.nameLabel.text = moToSet.name;
-            
-            self.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [moToSet.releaseDate yearAsString], moToSet.director];
-            
-            self.favoriteButton.selected = moToSet.isFavorite;
-            
-            [self setPosterImageToURL:moToSet.posterSmallURL];
-        });
-    }
+    
+    [self configureCell];
 }
 
 - (IBAction)favoriteButtonTouched:(id)sender
@@ -104,7 +129,11 @@
 {
     UIImage *newImage = [change objectForKey:NSKeyValueChangeNewKey];
 
-    [self setMagicFontColorsForImage: newImage];
+    // sometimes we get NSNull back...
+    if ([newImage isKindOfClass: [UIImage class]])
+    {
+        [self setMagicFontColorsForImage: newImage];
+    }
 }
 
 - (void) setMagicFontColorsForImage: (UIImage *)imageToAverage
@@ -115,6 +144,7 @@
 
     self.nameLabel.textColor = textColor;
     self.yearAndDirectorLabel.textColor = textColor;
+    self.shortDescriptionLabel.textColor = textColor;
 }
 
 @end

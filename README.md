@@ -27,9 +27,7 @@ iTunes Movie Browser sample app for SalesForce
 
 1. I’m not displaying a movie description in the cells because there appears to be no “shortDescription” or summarized description in the movie information sent back by ITMS.  There is a “longDescription”, though, I’d love to figure out how to summarize it down to a short description, or I’d like to figure out what magic I need to do in the not-super-well-documented API to get the short description to be returned.
 
-2. Detail View’s content needs to be embedded in a scroll view so more information can be conveyed while the iPad is in landscape mode.  The “Type movie into search bar” label doesn’t fit the iPhone screen (I thought I had selected the “adjust font size automatically” box in Interface Builder but apparently not).
-
-3. I had a whole bunch of Unit Tests I wanted to write (e.g. valid movie objects, bogus dates, etc.) but ran out of time.  If I’m allowed to do a revision (which I’m likely to do on my own anyways), I’ll definitely add a few!
+2. I had a whole bunch of Unit Tests I wanted to write (e.g. valid movie objects, bogus dates, etc.) but ran out of time.  If I’m allowed to do a revision (which I’m likely to do on my own anyways), I’ll definitely add a few!
 
 # Wish I had more time to invest in:
 

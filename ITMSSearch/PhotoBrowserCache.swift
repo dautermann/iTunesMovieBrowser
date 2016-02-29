@@ -17,8 +17,6 @@ import UIKit
     
     var urlSession : NSURLSession
     
-    var visibleAlertController : UIAlertController?
-
     // http://krakendev.io/blog/the-right-way-to-write-a-singleton
     private override init() {
         
@@ -77,38 +75,25 @@ import UIKit
             {
                 let image = UIImage(data: data)
                 
-                let imageViewURL = imageView.imageURL
-                
-                if imageViewURL.isEqual(urlToFetch) == true
+                if let imageViewURL = imageView.imageURL
                 {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        imageView.image = image
-                    })
-                }
+                    if imageViewURL.isEqual(urlToFetch) == true
+                    {
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            imageView.image = image
+                        })
+                    }
 
-                do {
-                    try data.writeToURL(cachedFilenameURL, options: .AtomicWrite)
-                } catch let error as NSError {
-                    print("couldn't write data to \(cachedFilenameURL.absoluteString) - \(error.localizedDescription)")
+                    do {
+                        try data.writeToURL(cachedFilenameURL, options: .AtomicWrite)
+                    } catch let error as NSError {
+                        print("couldn't write data to \(cachedFilenameURL.absoluteString) - \(error.localizedDescription)")
+                    }
                 }
             } else {
                 print("got an error when fetching from \(request.URL?.absoluteString) - \(error?.localizedDescription)")
                 
-                if let mainwindow = UIApplication.sharedApplication().delegate!.window
-                {
-                    if self.visibleAlertController == nil
-                    {
-                        self.visibleAlertController = UIAlertController(title: "Alert", message: "Didn't get a picture back", preferredStyle: UIAlertControllerStyle.Alert)
-                        if let alertController = self.visibleAlertController
-                        {
-                            alertController.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default)
-                            { action -> Void in
-                                self.visibleAlertController = nil
-                            })
-                            mainwindow!.rootViewController!.presentViewController(alertController, animated: true, completion: nil)
-                        }
-                    }
-                }
+                SFAlertController.sharedInstance().displayAlertIfPossible("Didn't get a picture back")
             }
         })
         task.resume()

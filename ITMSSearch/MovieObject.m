@@ -10,6 +10,7 @@
 #import "NSDate+Extension.h"
 #import "ITMSSearch-Swift.h"
 #import "SFSearchResultCell.h"
+#import "SFAlertController.h"
 
 @interface MovieObject ()
 
@@ -64,7 +65,7 @@
     _releaseDate = [NSDate dateWithString: movieDictionary[@"releaseDate"]];
     _posterSmallURL = [NSURL URLWithString: movieDictionary[@"artworkUrl100"]];
     _longDescription = movieDictionary[@"longDescription"];
-    
+    _shortDescription = movieDictionary[@"shortDescription"]; // only for certain movies
     _isFavorite = [[MovieFavoritesController sharedInstance] isThisMovieAFavorite:self.movieIDString];
     
     // I want a big poster
@@ -84,11 +85,13 @@
 - (void)fetchInformationAboutMovie
 {
     NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/lookup?id=%@", self.movieIDString]];
-    self.fetchTask = [[NSURLSession sharedSession] dataTaskWithURL:urlToSearch completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError *error) {
+    self.fetchTask = [[NSURLSession sharedSession] dataTaskWithURL:urlToSearch completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         
         if (error != nil)
         {
             NSLog(@"error when trying to connect to %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
+            [[SFAlertController sharedInstance] displayAlertIfPossible: [NSString stringWithFormat: @"error when trying to connect to server - %@", error.localizedDescription]];
+
         } else {
             
             NSDictionary *itmsResultDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
@@ -96,6 +99,7 @@
             if (error != nil)
             {
                 NSLog(@"error when trying to deserialize data from %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
+                [[SFAlertController sharedInstance] displayAlertIfPossible: [NSString stringWithFormat: @"can't decode response from server - %@", error.localizedDescription]];
             } else {
                 NSArray *rawMovieArray = itmsResultDict[@"results"];
 
@@ -103,8 +107,13 @@
                 if ([rawMovieArray count] > 0)
                 {
                     NSDictionary *movieDictionary = rawMovieArray[0];
-                    NSLog(@"movie dict is %@", movieDictionary);
+                    // NSLog(@"movie dict is %@", movieDictionary);
                     [self populateMovieFieldsWith:movieDictionary];
+                    
+                    if (self.collectionCell != nil )
+                    {
+                        [self.collectionCell configureCell];
+                    }
                 }
             }
         }

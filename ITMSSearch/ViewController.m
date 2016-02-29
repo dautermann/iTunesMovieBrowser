@@ -10,6 +10,7 @@
 #import "SFSearchResultCell.h"
 #import "MovieObject.h"
 #import "DetailViewController.h"
+#import "SFAlertController.h"
 
 @interface ViewController ()
 
@@ -101,22 +102,20 @@
         if (error != nil)
         {
             NSLog(@"error when trying to connect to %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
-       
+            
+            [[SFAlertController sharedInstance] displayAlertIfPossible: [NSString stringWithFormat: @"error when trying to connect to server - %@", error.localizedDescription]];
         } else {
             
             NSDictionary *itmsResultDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             if (error != nil)
             {
                 NSLog(@"error when trying to deserialize data from %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
+                [[SFAlertController sharedInstance] displayAlertIfPossible: [NSString stringWithFormat: @"can't decode response from server - %@", error.localizedDescription]];
             } else {
                 NSArray *rawMovieArray = itmsResultDict[@"results"];
                 
                 NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity: [rawMovieArray count]];
 
-                NSLog(@"movieArray is %ld", (unsigned long)[rawMovieArray count]);
-                
-                NSLog(@"%@", rawMovieArray);
-                
                 for (NSDictionary *movieDictionary in rawMovieArray)
                 {
                     MovieObject *newObject = [[MovieObject alloc] initWithDictionary:movieDictionary];
@@ -160,6 +159,9 @@
     // since the cell needs to retain a copy of MovieObject (for setting/unsetting favorites),
     // we'll just do all the outlet setting in there via this call:
     [cell setCellToMovieObject:movieObject];
+
+    // and we do this in case the cell needs to get updated information from the movie object
+    movieObject.collectionCell = cell;
     
     return cell;
 }

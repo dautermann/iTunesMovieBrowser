@@ -49,8 +49,8 @@
 
 - (UIColor*)blackOrWhiteContrastingColor
 {
-    UIColor *black = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
-    UIColor *white = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    UIColor *black = [UIColor redColor]; // [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    UIColor *white = [UIColor blueColor]; // [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     
     float blackDiff = [self luminosityDifference:black];
     float whiteDiff = [self luminosityDifference:white];
