@@ -2,8 +2,8 @@
 //  ViewController.m
 //  ITMSSearch
 //
-//  Created by Michael Dautermann on 2/27/16.
-//  Copyright © 2016 Michael Dautermann. All rights reserved.
+//  Created by Michael Dautermann on 6/25/18.
+//  Copyright © 2018 Michael Dautermann. All rights reserved.
 //
 
 #import "ViewController.h"
@@ -31,7 +31,8 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -41,11 +42,12 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
 
     // stop doing whatever we were doing to cause a memory warning to fire
-    if (self.searchTask != nil )
+    if (self.searchTask != nil)
     {
         [self.searchTask cancel];
         self.searchTask = nil;
@@ -56,16 +58,16 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] compare:@"ShowDetail" options:NSCaseInsensitiveSearch range:NSMakeRange(0,10)] == NSOrderedSame)
+    if ([[segue identifier] compare:@"ShowDetail" options:NSCaseInsensitiveSearch range:NSMakeRange(0, 10)] == NSOrderedSame)
     {
         [[self navigationController] setNavigationBarHidden:NO animated:NO];
 
         NSArray *indexPaths = [self.movieCollectionView indexPathsForSelectedItems];
         NSIndexPath *selectedCell = indexPaths[0];
-        
+
         // Get reference to the destination view controller
         DetailViewController *vc = [segue destinationViewController];
-        
+
         // Pass any objects to the view controller here, like...
         vc.movieObjectToDisplay = [self.movieArray objectAtIndex:selectedCell.row];
     }
@@ -79,56 +81,57 @@
     {
         self.tapOutsideSearchBarRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:searchBar action:@selector(resignFirstResponder)];
     }
-    
+
     [self.view addGestureRecognizer:self.tapOutsideSearchBarRecognizer];
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
-    [self.view removeGestureRecognizer: self.tapOutsideSearchBarRecognizer];
+    [self.view removeGestureRecognizer:self.tapOutsideSearchBarRecognizer];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSString *encodedSearchTerm = [searchBar.text stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
     NSURL *urlToSearch = [NSURL URLWithString:[NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&entity=movie", encodedSearchTerm]];
-    
-    if (self.searchTask != nil )
+
+    if (self.searchTask != nil)
     {
         [self.searchTask cancel];
         self.searchTask = nil;
     }
-    
-    self.searchTask = [[NSURLSession sharedSession] dataTaskWithURL:urlToSearch completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError *error) {
-        
+
+    self.searchTask = [[NSURLSession sharedSession] dataTaskWithURL:urlToSearch completionHandler: ^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *error) {
         if (error != nil)
         {
             NSLog(@"error when trying to connect to %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
-            
-            [[SFAlertController sharedInstance] displayAlertIfPossible: [NSString stringWithFormat: @"error when trying to connect to server - %@", error.localizedDescription]];
-        } else {
-            
+
+            [[SFAlertController sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"error when trying to connect to server - %@", error.localizedDescription]];
+        }
+        else
+        {
             NSDictionary *itmsResultDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&error];
             if (error != nil)
             {
                 NSLog(@"error when trying to deserialize data from %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
-                [[SFAlertController sharedInstance] displayAlertIfPossible: [NSString stringWithFormat: @"can't decode response from server - %@", error.localizedDescription]];
-            } else {
+                [[SFAlertController sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"can't decode response from server - %@", error.localizedDescription]];
+            }
+            else
+            {
                 NSArray *rawMovieArray = itmsResultDict[@"results"];
-                
-                NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity: [rawMovieArray count]];
+
+                NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity:[rawMovieArray count]];
 
                 for (NSDictionary *movieDictionary in rawMovieArray)
                 {
                     MovieObject *newObject = [[MovieObject alloc] initWithDictionary:movieDictionary];
-                    [movieObjectMutableArray addObject: newObject];
+                    [movieObjectMutableArray addObject:newObject];
                 }
-                
+
                 // replace mutable with immutable ; we won't make any changes to the array
                 self.movieArray = movieObjectMutableArray;
-                
+
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
                     if ([self.movieArray count] > 0)
                     {
                         self.noMoviesVisibleLabel.hidden = YES;
@@ -137,9 +140,8 @@
                 });
             }
         }
-
     }];
-    
+
     [self.searchTask resume];
 }
 
@@ -155,7 +157,7 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     SFSearchResultCell *cell = (SFSearchResultCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"SFSearchResultCell" forIndexPath:indexPath];
-    
+
     MovieObject *movieObject = [self.movieArray objectAtIndex:indexPath.row];
 
     // since the cell needs to retain a copy of MovieObject (for setting/unsetting favorites),
@@ -164,7 +166,7 @@
 
     // and we do this in case the cell needs to get updated information from the movie object
     movieObject.collectionCell = cell;
-    
+
     return cell;
 }
 
@@ -176,4 +178,3 @@
 }
 
 @end
-

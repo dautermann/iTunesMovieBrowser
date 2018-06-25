@@ -2,8 +2,8 @@
 //  SFSearchResultCell.m
 //  ITMSSearch
 //
-//  Created by Michael Dautermann on 2/27/16.
-//  Copyright © 2016 Michael Dautermann. All rights reserved.
+//  Created by Michael Dautermann on 6/25/18.
+//  Copyright © 2018 Michael Dautermann. All rights reserved.
 //
 
 #import "SFSearchResultCell.h"
@@ -28,19 +28,21 @@
 
 @implementation SFSearchResultCell
 
-- (void) awakeFromNib
+- (void)awakeFromNib
 {
-    [self registerSelfAsObserverForImageView];
+    [super awakeFromNib];
     
+    [self registerSelfAsObserverForImageView];
+
     [self.posterImageView.layer setOpacity:0.6f];
 }
 
-- (void) dealloc
+- (void)dealloc
 {
     [self.posterImageView removeObserver:self forKeyPath:@"image"];
 }
 
-- (void) prepareForReuse
+- (void)prepareForReuse
 {
     if (self.movieObject != nil)
     {
@@ -52,30 +54,30 @@
     self.favoriteButton.selected = NO;
 
     self.posterImageView.imageURL = nil;
-    
+
     self.posterImageView.image = nil;
 }
 
-- (void) setPosterImageToURL: (NSURL *)imageURL
+- (void)setPosterImageToURL:(NSURL *)imageURL
 {
     self.posterImageView.imageURL = imageURL;
 
     [[PhotoBrowserCache sharedInstance] performGetPhoto:imageURL intoImageView:self.posterImageView];
 }
 
-- (void) configureCell
+- (void)configureCell
 {
     if ([self.movieObject.name length] > 0)
     {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.nameLabel.text = self.movieObject.name;
-            
+
             self.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [self.movieObject.releaseDate yearAsString], self.movieObject.director];
-            
+
             self.shortDescriptionLabel.text = self.movieObject.shortDescription;
-            
+
             self.favoriteButton.selected = self.movieObject.isFavorite;
-            
+
             // the 100 x 100 simply looks too grainy to be sexy, so we'll use the BIG poster...
             //
             // the only issue might be on large iPads where a lot of images are on screen.
@@ -87,10 +89,10 @@
     }
 }
 
-- (void) setCellToMovieObject:(MovieObject *)moToSet
+- (void)setCellToMovieObject:(MovieObject *)moToSet
 {
     self.movieObject = moToSet;
-    
+
     [self configureCell];
 }
 
@@ -101,12 +103,14 @@
         [[MovieFavoritesController sharedInstance] addMovieID:self.movieObject.movieIDString];
         self.favoriteButton.selected = YES;
         self.movieObject.isFavorite = YES;
-    } else {
+    }
+    else
+    {
         [[MovieFavoritesController sharedInstance] removeMovieID:self.movieObject.movieIDString];
         self.favoriteButton.selected = NO;
         self.movieObject.isFavorite = NO;
     }
-    
+
     // I want to add a notification here to tell observers
     // that this movie object's favorite status has changed
 }
@@ -116,11 +120,10 @@
 - (void)registerSelfAsObserverForImageView
 {
     [self.posterImageView addObserver:self
-                forKeyPath:@"image"
-                   options:(NSKeyValueObservingOptionNew)
-                   context:NULL];
+                           forKeyPath:@"image"
+                              options:(NSKeyValueObservingOptionNew)
+                              context:NULL];
 }
-
 
 - (void)observeValueForKeyPath:(NSString *)keyPath
                       ofObject:(id)object
@@ -130,13 +133,13 @@
     UIImage *newImage = [change objectForKey:NSKeyValueChangeNewKey];
 
     // sometimes we get NSNull back...
-    if ([newImage isKindOfClass: [UIImage class]])
+    if ([newImage isKindOfClass:[UIImage class]])
     {
-        [self setMagicFontColorsForImage: newImage];
+        [self setMagicFontColorsForImage:newImage];
     }
 }
 
-- (void) setMagicFontColorsForImage: (UIImage *)imageToAverage
+- (void)setMagicFontColorsForImage:(UIImage *)imageToAverage
 {
     // this code attempts to set a contrasting text color based on the average color of the image
     UIColor *averageColor = [imageToAverage averageColor];
