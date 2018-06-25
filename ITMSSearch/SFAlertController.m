@@ -3,7 +3,7 @@
 //  ITMSSearch
 //
 //  Created by Michael Dautermann on 2/29/16.
-//  Copyright © 2016 Michael Dautermann. All rights reserved.
+//  Copyright © 2018 Michael Dautermann. All rights reserved.
 //
 
 #import "SFAlertController.h"
@@ -19,7 +19,7 @@
 
 @implementation SFAlertController
 
-+ (id)sharedInstance
++ (SFAlertController *)sharedInstance
 {
     static SFAlertController *sharedInstance = nil;
     static dispatch_once_t onceToken;

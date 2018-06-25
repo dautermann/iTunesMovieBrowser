@@ -2,8 +2,8 @@
 //  DetailViewController.m
 //  ITMSSearch
 //
-//  Created by Michael Dautermann on 2/27/16.
-//  Copyright © 2016 Michael Dautermann. All rights reserved.
+//  Created by Michael Dautermann on 6/25/18.
+//  Copyright © 2018 Michael Dautermann. All rights reserved.
 //
 
 #import "DetailViewController.h"
