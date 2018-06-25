@@ -14,7 +14,7 @@
 
 @interface SFSearchResultCell ()
 
-@property (weak) IBOutlet SFImageView *posterImageView;
+@property (weak) IBOutlet SFDimImageView *posterImageView;
 @property (weak) IBOutlet UILabel *nameLabel;
 @property (weak) IBOutlet UILabel *yearAndDirectorLabel;
 @property (weak) IBOutlet UILabel *shortDescriptionLabel;
@@ -26,6 +26,19 @@
 
 @end
 
+@implementation SFDimImageView
+
+/**
+ darken the image somewhat so text in front of can pop out
+ */
+- (void) setImage:(UIImage *)sourceImage
+{
+    UIImage *outputImage = [UIImage colorizeImage:sourceImage withColor:[UIColor colorWithWhite: 0.0 alpha: 0.5]];
+    [super setImage: outputImage];
+}
+
+@end
+
 @implementation SFSearchResultCell
 
 - (void)awakeFromNib
@@ -33,8 +46,6 @@
     [super awakeFromNib];
     
     [self registerSelfAsObserverForImageView];
-
-    [self.posterImageView.layer setOpacity:0.6f];
 }
 
 - (void)dealloc
@@ -51,6 +62,10 @@
         // and forget the movie object (because we're about to get reused)
         self.movieObject = nil;
     }
+    self.nameLabel.text = @"";
+    self.yearAndDirectorLabel.text = @"";
+    self.shortDescriptionLabel.text = @"";
+
     self.favoriteButton.selected = NO;
 
     self.posterImageView.imageURL = nil;
@@ -74,7 +89,12 @@
 
             self.yearAndDirectorLabel.text = [NSString stringWithFormat:@"%@ %@", [self.movieObject.releaseDate yearAsString], self.movieObject.director];
 
-            self.shortDescriptionLabel.text = self.movieObject.shortDescription;
+            NSString *description = self.movieObject.shortDescription;
+            if(description == NULL)
+            {
+                description = self.movieObject.longDescription;
+            }
+            self.shortDescriptionLabel.text = description;
 
             self.favoriteButton.selected = self.movieObject.isFavorite;
 
@@ -100,13 +120,13 @@
 {
     if (self.favoriteButton.selected == NO)
     {
-        [[MovieFavoritesController sharedInstance] addMovieID:self.movieObject.movieIDString];
+        [[MovieFavoritesManager sharedInstance] addMovieID:self.movieObject.movieIDString];
         self.favoriteButton.selected = YES;
         self.movieObject.isFavorite = YES;
     }
     else
     {
-        [[MovieFavoritesController sharedInstance] removeMovieID:self.movieObject.movieIDString];
+        [[MovieFavoritesManager sharedInstance] removeMovieID:self.movieObject.movieIDString];
         self.favoriteButton.selected = NO;
         self.movieObject.isFavorite = NO;
     }

@@ -1,27 +1,27 @@
 //
-//  SFAlertController.m
+//  SFAlertManager.m
 //  ITMSSearch
 //
 //  Created by Michael Dautermann on 2/29/16.
 //  Copyright © 2018 Michael Dautermann. All rights reserved.
 //
 
-#import "SFAlertController.h"
+#import "SFAlertManager.h"
 #import <UIKit/UIKit.h>
 
 // this isn't a real UIAlertController subclass because I'd like to manage
 // when a UIAlertController is being displayed, and only display one at a time.
-@interface SFAlertController ()
+@interface SFAlertManager ()
 
 @property (strong) UIAlertController *visibleAlertController;
 
 @end
 
-@implementation SFAlertController
+@implementation SFAlertManager
 
-+ (SFAlertController *)sharedInstance
++ (SFAlertManager *)sharedInstance
 {
-    static SFAlertController *sharedInstance = nil;
+    static SFAlertManager *sharedInstance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];

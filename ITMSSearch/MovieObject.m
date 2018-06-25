@@ -10,7 +10,7 @@
 #import "NSDate+Extension.h"
 #import "ITMSSearch-Swift.h"
 #import "SFSearchResultCell.h"
-#import "SFAlertController.h"
+#import "SFAlertManager.h"
 
 @interface MovieObject ()
 
@@ -66,7 +66,7 @@
     _posterSmallURL = [NSURL URLWithString:movieDictionary[@"artworkUrl100"]];
     _longDescription = movieDictionary[@"longDescription"];
     _shortDescription = movieDictionary[@"shortDescription"]; // only for certain movies
-    _isFavorite = [[MovieFavoritesController sharedInstance] isThisMovieAFavorite:self.movieIDString];
+    _isFavorite = [[MovieFavoritesManager sharedInstance] isThisMovieAFavorite:self.movieIDString];
 
     // I want a big poster
     //
@@ -89,7 +89,7 @@
         if (error != nil)
         {
             NSLog(@"error when trying to connect to %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
-            [[SFAlertController sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"error when trying to connect to server - %@", error.localizedDescription]];
+            [[SFAlertManager sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"error when trying to connect to server - %@", error.localizedDescription]];
         }
         else
         {
@@ -98,7 +98,7 @@
             if (error != nil)
             {
                 NSLog(@"error when trying to deserialize data from %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
-                [[SFAlertController sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"can't decode response from server - %@", error.localizedDescription]];
+                [[SFAlertManager sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"can't decode response from server - %@", error.localizedDescription]];
             }
             else
             {

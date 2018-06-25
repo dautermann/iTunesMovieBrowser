@@ -13,6 +13,10 @@
 @property (strong) NSURL *imageURL;
 @end
 
+@interface SFDimImageView : SFImageView
+
+@end
+
 @interface SFSearchResultCell : UICollectionViewCell
 
 @property (weak) IBOutlet UIButton *favoriteButton;

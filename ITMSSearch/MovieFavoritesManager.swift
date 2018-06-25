@@ -1,5 +1,5 @@
 //
-//  MovieFavoritesController.swift
+//  MovieFavoritesManager
 //  ITMSSearch
 //
 //  Created by Michael Dautermann on 6/25/18.
@@ -13,9 +13,9 @@ import UIKit
 // I'm designing this so if I had more quality time to work on the app, I could replace this
 // with a plist parser, or some magic in CoreData, or calls to a cloud database like Parse (soon to be R.I.P.),
 // maintaining the API
-class MovieFavoritesController: NSObject {
+class MovieFavoritesManager: NSObject {
 
-    @objc static let sharedInstance = MovieFavoritesController()
+    @objc static let sharedInstance = MovieFavoritesManager()
     
     var favoriteSet : Set<String>?
     

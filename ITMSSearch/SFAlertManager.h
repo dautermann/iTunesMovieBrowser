@@ -1,5 +1,5 @@
 //
-//  SFAlertController.h
+//  SFAlertManager.h
 //  ITMSSearch
 //
 //  Created by Michael Dautermann on 2/29/16.
@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SFAlertController : NSObject
+@interface SFAlertManager : NSObject
 
-+ (SFAlertController *)sharedInstance;
++ (SFAlertManager *)sharedInstance;
 
 - (BOOL)displayAlertIfPossible:(NSString *)alertString;
 

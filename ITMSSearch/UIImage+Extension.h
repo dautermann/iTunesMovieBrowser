@@ -13,5 +13,6 @@
 @interface UIImage (AverageColor)
 
 - (UIColor *)averageColor;
++ (UIImage *)colorizeImage:(UIImage *)image withColor:(UIColor *)color;
 
 @end

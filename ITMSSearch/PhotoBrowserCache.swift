@@ -85,7 +85,7 @@ class PhotoBrowserCache: NSObject, URLSessionDelegate, URLSessionTaskDelegate {
             } else {
                 print("got an error when fetching from \(request.url?.absoluteString ?? "unknown URL") - \(error?.localizedDescription ?? "unknown error")")
                 
-                SFAlertController.sharedInstance() //sharedInstance().displayAlertIfPossible("Didn't get a picture back")
+                SFAlertManager.sharedInstance() //sharedInstance().displayAlertIfPossible("Didn't get a picture back")
             }
         })
         task.resume()

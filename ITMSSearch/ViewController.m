@@ -10,7 +10,7 @@
 #import "SFSearchResultCell.h"
 #import "MovieObject.h"
 #import "DetailViewController.h"
-#import "SFAlertController.h"
+#import "SFAlertManager.h"
 
 @interface ViewController ()
 
@@ -106,7 +106,7 @@
         {
             NSLog(@"error when trying to connect to %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
 
-            [[SFAlertController sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"error when trying to connect to server - %@", error.localizedDescription]];
+            [[SFAlertManager sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"error when trying to connect to server - %@", error.localizedDescription]];
         }
         else
         {
@@ -114,23 +114,29 @@
             if (error != nil)
             {
                 NSLog(@"error when trying to deserialize data from %@ - %@", urlToSearch.absoluteString, error.localizedDescription);
-                [[SFAlertController sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"can't decode response from server - %@", error.localizedDescription]];
+                [[SFAlertManager sharedInstance] displayAlertIfPossible:[NSString stringWithFormat:@"can't decode response from server - %@", error.localizedDescription]];
             }
             else
             {
                 NSArray *rawMovieArray = itmsResultDict[@"results"];
-
                 NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity:[rawMovieArray count]];
 
                 for (NSDictionary *movieDictionary in rawMovieArray)
                 {
-                    MovieObject *newObject = [[MovieObject alloc] initWithDictionary:movieDictionary];
-                    [movieObjectMutableArray addObject:newObject];
+                    // we only want to display single movies, not full collections (e.g. Star Wars six volume set)
+                    //
+                    // to do this, single movies are the dictionary objects that have a "trackName" key
+                    if ([movieDictionary objectForKey:@"trackName"] != NULL)
+                    {
+                        MovieObject *newObject = [[MovieObject alloc] initWithDictionary:movieDictionary];
+                        [movieObjectMutableArray addObject:newObject];
+                    }
                 }
 
                 // replace mutable with immutable ; we won't make any changes to the array
                 self.movieArray = movieObjectMutableArray;
 
+                // UI things need to happen on the main thread
                 dispatch_async(dispatch_get_main_queue(), ^{
                     if ([self.movieArray count] > 0)
                     {
@@ -166,7 +172,7 @@
 
     // and we do this in case the cell needs to get updated information from the movie object
     movieObject.collectionCell = cell;
-
+    
     return cell;
 }
 

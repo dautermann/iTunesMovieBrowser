@@ -45,7 +45,7 @@
 
 - (void)updateFavoritesView
 {
-    NSSet *favoriteSet = [[MovieFavoritesController sharedInstance] getAllFavorites];
+    NSSet *favoriteSet = [[MovieFavoritesManager sharedInstance] getAllFavorites];
 
     if (favoriteSet != self.currentFavoritesSet)
     {

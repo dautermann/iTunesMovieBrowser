@@ -10,7 +10,7 @@
 		255130B81C82A68A0086ADAA /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 255130B71C82A68A0086ADAA /* UIColor+Extension.m */; };
 		255A064C1C81D2B300F661C0 /* UIImage+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A064B1C81D2B300F661C0 /* UIImage+Extension.m */; };
 		255A064F1C81DAE700F661C0 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 255A064E1C81DAE700F661C0 /* DetailViewController.m */; };
-		255A06521C8203BD00F661C0 /* MovieFavoritesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255A06511C8203BD00F661C0 /* MovieFavoritesController.swift */; };
+		255A06521C8203BD00F661C0 /* MovieFavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255A06511C8203BD00F661C0 /* MovieFavoritesManager.swift */; };
 		2576A6B31C8181CC00819959 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B21C8181CC00819959 /* main.m */; };
 		2576A6B61C8181CC00819959 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B51C8181CC00819959 /* AppDelegate.m */; };
 		2576A6B91C8181CC00819959 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B81C8181CC00819959 /* ViewController.m */; };
@@ -22,7 +22,7 @@
 		2576A6DB1C81A3C900819959 /* NSDate+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6DA1C81A3C900819959 /* NSDate+Extension.m */; };
 		2576A6DE1C81A66A00819959 /* MovieObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6DD1C81A66A00819959 /* MovieObject.m */; };
 		259580E41C82522C00A422B6 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 259580E31C82522C00A422B6 /* FavoritesViewController.m */; };
-		25B900B31C849CD100F0A4F0 /* SFAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B900B21C849CD100F0A4F0 /* SFAlertController.m */; };
+		25B900B31C849CD100F0A4F0 /* SFAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B900B21C849CD100F0A4F0 /* SFAlertManager.m */; };
 		25D78E3E1C81C6D600BD08A6 /* PhotoBrowserCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D78E3D1C81C6D600BD08A6 /* PhotoBrowserCache.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,7 +45,7 @@
 		255A064B1C81D2B300F661C0 /* UIImage+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Extension.m"; sourceTree = "<group>"; };
 		255A064D1C81DAE700F661C0 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
 		255A064E1C81DAE700F661C0 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
-		255A06511C8203BD00F661C0 /* MovieFavoritesController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieFavoritesController.swift; sourceTree = "<group>"; };
+		255A06511C8203BD00F661C0 /* MovieFavoritesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieFavoritesManager.swift; sourceTree = "<group>"; };
 		2576A6AE1C8181CC00819959 /* ITMSSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ITMSSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2576A6B21C8181CC00819959 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2576A6B41C8181CC00819959 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -67,8 +67,8 @@
 		2576A6DD1C81A66A00819959 /* MovieObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieObject.m; sourceTree = "<group>"; };
 		259580E21C82522C00A422B6 /* FavoritesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavoritesViewController.h; sourceTree = "<group>"; };
 		259580E31C82522C00A422B6 /* FavoritesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavoritesViewController.m; sourceTree = "<group>"; };
-		25B900B11C849CD100F0A4F0 /* SFAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAlertController.h; sourceTree = "<group>"; };
-		25B900B21C849CD100F0A4F0 /* SFAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAlertController.m; sourceTree = "<group>"; };
+		25B900B11C849CD100F0A4F0 /* SFAlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFAlertManager.h; sourceTree = "<group>"; };
+		25B900B21C849CD100F0A4F0 /* SFAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAlertManager.m; sourceTree = "<group>"; };
 		25D78E3C1C81C6D500BD08A6 /* ITMSSearch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ITMSSearch-Bridging-Header.h"; sourceTree = "<group>"; };
 		25D78E3D1C81C6D600BD08A6 /* PhotoBrowserCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -91,14 +91,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		253ED94C20E18E48001BB052 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				255A064D1C81DAE700F661C0 /* DetailViewController.h */,
+				255A064E1C81DAE700F661C0 /* DetailViewController.m */,
+				259580E21C82522C00A422B6 /* FavoritesViewController.h */,
+				259580E31C82522C00A422B6 /* FavoritesViewController.m */,
+				2576A6B71C8181CC00819959 /* ViewController.h */,
+				2576A6B81C8181CC00819959 /* ViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		253ED94D20E18F68001BB052 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				255A06511C8203BD00F661C0 /* MovieFavoritesManager.swift */,
+				2576A6DC1C81A66A00819959 /* MovieObject.h */,
+				2576A6DD1C81A66A00819959 /* MovieObject.m */,
+				25D78E3D1C81C6D600BD08A6 /* PhotoBrowserCache.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		255A06501C81DB1500F661C0 /* CategoryExtensions */ = {
 			isa = PBXGroup;
 			children = (
 				2576A6D91C81A3C900819959 /* NSDate+Extension.h */,
 				2576A6DA1C81A3C900819959 /* NSDate+Extension.m */,
-				255A064A1C81D2B300F661C0 /* UIImage+Extension.h */,
 				255130B61C82A68A0086ADAA /* UIColor+Extension.h */,
 				255130B71C82A68A0086ADAA /* UIColor+Extension.m */,
+				255A064A1C81D2B300F661C0 /* UIImage+Extension.h */,
 				255A064B1C81D2B300F661C0 /* UIImage+Extension.m */,
 			);
 			name = CategoryExtensions;
@@ -127,20 +151,9 @@
 			children = (
 				2576A6B41C8181CC00819959 /* AppDelegate.h */,
 				2576A6B51C8181CC00819959 /* AppDelegate.m */,
-				255A064D1C81DAE700F661C0 /* DetailViewController.h */,
-				255A064E1C81DAE700F661C0 /* DetailViewController.m */,
-				259580E21C82522C00A422B6 /* FavoritesViewController.h */,
-				259580E31C82522C00A422B6 /* FavoritesViewController.m */,
-				255A06511C8203BD00F661C0 /* MovieFavoritesController.swift */,
-				2576A6DC1C81A66A00819959 /* MovieObject.h */,
-				2576A6DD1C81A66A00819959 /* MovieObject.m */,
-				25D78E3D1C81C6D600BD08A6 /* PhotoBrowserCache.swift */,
-				25B900B11C849CD100F0A4F0 /* SFAlertController.h */,
-				25B900B21C849CD100F0A4F0 /* SFAlertController.m */,
-				2576A6D61C81860900819959 /* SFSearchResultCell.h */,
-				2576A6D71C81860900819959 /* SFSearchResultCell.m */,
-				2576A6B71C8181CC00819959 /* ViewController.h */,
-				2576A6B81C8181CC00819959 /* ViewController.m */,
+				253ED94C20E18E48001BB052 /* Controller */,
+				253ED94D20E18F68001BB052 /* Model */,
+				25BC26AD20E18FCC001BB464 /* View */,
 				2576A6BA1C8181CC00819959 /* Main.storyboard */,
 				2576A6BD1C8181CC00819959 /* Assets.xcassets */,
 				2576A6BF1C8181CC00819959 /* LaunchScreen.storyboard */,
@@ -167,6 +180,17 @@
 				2576A6CD1C8181CC00819959 /* Info.plist */,
 			);
 			path = ITMSSearchTests;
+			sourceTree = "<group>";
+		};
+		25BC26AD20E18FCC001BB464 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				25B900B11C849CD100F0A4F0 /* SFAlertManager.h */,
+				25B900B21C849CD100F0A4F0 /* SFAlertManager.m */,
+				2576A6D61C81860900819959 /* SFSearchResultCell.h */,
+				2576A6D71C81860900819959 /* SFSearchResultCell.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -276,13 +300,13 @@
 				2576A6B91C8181CC00819959 /* ViewController.m in Sources */,
 				255A064F1C81DAE700F661C0 /* DetailViewController.m in Sources */,
 				2576A6DB1C81A3C900819959 /* NSDate+Extension.m in Sources */,
-				25B900B31C849CD100F0A4F0 /* SFAlertController.m in Sources */,
+				25B900B31C849CD100F0A4F0 /* SFAlertManager.m in Sources */,
 				2576A6D81C81860900819959 /* SFSearchResultCell.m in Sources */,
 				2576A6DE1C81A66A00819959 /* MovieObject.m in Sources */,
 				2576A6B61C8181CC00819959 /* AppDelegate.m in Sources */,
 				2576A6B31C8181CC00819959 /* main.m in Sources */,
 				259580E41C82522C00A422B6 /* FavoritesViewController.m in Sources */,
-				255A06521C8203BD00F661C0 /* MovieFavoritesController.swift in Sources */,
+				255A06521C8203BD00F661C0 /* MovieFavoritesManager.swift in Sources */,
 				255A064C1C81D2B300F661C0 /* UIImage+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,7 +464,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = ITMSSearch/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myke.ITMSSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -459,7 +483,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				INFOPLIST_FILE = ITMSSearch/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.myke.ITMSSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
