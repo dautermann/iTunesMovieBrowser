@@ -11,6 +11,7 @@
 #import "MovieObject.h"
 #import "DetailViewController.h"
 #import "SFAlertManager.h"
+#import "UIView+Extension.h"
 
 @interface ViewController ()
 
@@ -137,13 +138,23 @@
                 self.movieArray = movieObjectMutableArray;
 
                 // UI things need to happen on the main thread
+                // show "no movies visible" if moviearray count is zero
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    if ([self.movieArray count] > 0)
+
+                    if ([self.movieArray count] == 0)
                     {
-                        self.noMoviesVisibleLabel.hidden = YES;
+                        // animate a "no movies found" result
+                        self.noMoviesVisibleLabel.text = @"no movies found";
+                        self.noMoviesVisibleLabel.hidden = FALSE;
+                        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                            [self.noMoviesVisibleLabel pushTransition:1.0];
+                            self.noMoviesVisibleLabel.text = @"type a movie into the search bar above";
+                        });
+                    } else {
+                        self.noMoviesVisibleLabel.hidden = TRUE;
+                        [self.movieCollectionView reloadData];
                     }
-                    [self.movieCollectionView reloadData];
-                });
+               });
             }
         }
     }];

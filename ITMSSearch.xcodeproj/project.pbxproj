@@ -24,6 +24,7 @@
 		259580E41C82522C00A422B6 /* FavoritesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 259580E31C82522C00A422B6 /* FavoritesViewController.m */; };
 		25B900B31C849CD100F0A4F0 /* SFAlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 25B900B21C849CD100F0A4F0 /* SFAlertManager.m */; };
 		25D78E3E1C81C6D600BD08A6 /* PhotoBrowserCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D78E3D1C81C6D600BD08A6 /* PhotoBrowserCache.swift */; };
+		25F4EE6920E1B42C00D598FF /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 25F4EE6820E1B42C00D598FF /* UIView+Extension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,8 @@
 		25B900B21C849CD100F0A4F0 /* SFAlertManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFAlertManager.m; sourceTree = "<group>"; };
 		25D78E3C1C81C6D500BD08A6 /* ITMSSearch-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ITMSSearch-Bridging-Header.h"; sourceTree = "<group>"; };
 		25D78E3D1C81C6D600BD08A6 /* PhotoBrowserCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoBrowserCache.swift; sourceTree = "<group>"; };
+		25F4EE6720E1B42C00D598FF /* UIView+Extension.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		25F4EE6820E1B42C00D598FF /* UIView+Extension.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +127,8 @@
 				255130B71C82A68A0086ADAA /* UIColor+Extension.m */,
 				255A064A1C81D2B300F661C0 /* UIImage+Extension.h */,
 				255A064B1C81D2B300F661C0 /* UIImage+Extension.m */,
+				25F4EE6720E1B42C00D598FF /* UIView+Extension.h */,
+				25F4EE6820E1B42C00D598FF /* UIView+Extension.m */,
 			);
 			name = CategoryExtensions;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 				2576A6DE1C81A66A00819959 /* MovieObject.m in Sources */,
 				2576A6B61C8181CC00819959 /* AppDelegate.m in Sources */,
 				2576A6B31C8181CC00819959 /* main.m in Sources */,
+				25F4EE6920E1B42C00D598FF /* UIView+Extension.m in Sources */,
 				259580E41C82522C00A422B6 /* FavoritesViewController.m in Sources */,
 				255A06521C8203BD00F661C0 /* MovieFavoritesManager.swift in Sources */,
 				255A064C1C81D2B300F661C0 /* UIImage+Extension.m in Sources */,
