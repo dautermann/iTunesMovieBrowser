@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIImage (AverageColor)
+@interface UIImage (Extension)
 
 - (UIColor *)averageColor;
 + (UIImage *)colorizeImage:(UIImage *)image withColor:(UIColor *)color;

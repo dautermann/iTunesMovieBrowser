@@ -31,7 +31,7 @@
 
 #import "UIImage+Extension.h"
 
-@implementation UIImage (AverageColor)
+@implementation UIImage (Extension)
 
 - (UIColor *)averageColor
 {

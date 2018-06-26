@@ -38,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		253F1EAA20E1BF5500173CB6 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		255130B11C8277020086ADAA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		255130B21C8277DF0086ADAA /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Main.strings; sourceTree = "<group>"; };
 		255130B61C82A68A0086ADAA /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
@@ -136,6 +137,7 @@
 		2576A6A51C8181CC00819959 = {
 			isa = PBXGroup;
 			children = (
+				253F1EAA20E1BF5500173CB6 /* README.md */,
 				2576A6B01C8181CC00819959 /* ITMSSearch */,
 				2576A6CA1C8181CC00819959 /* ITMSSearchTests */,
 				2576A6AF1C8181CC00819959 /* Products */,
