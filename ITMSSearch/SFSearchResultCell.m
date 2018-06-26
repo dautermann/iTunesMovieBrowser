@@ -33,7 +33,13 @@
  */
 - (void) setImage:(UIImage *)sourceImage
 {
-    UIImage *outputImage = [UIImage colorizeImage:sourceImage withColor:[UIColor colorWithWhite: 0.0 alpha: 0.5]];
+    UIImage *outputImage = nil;
+    
+    // but only darken if there's a valid source image
+    if (sourceImage != nil)
+    {
+        outputImage = [UIImage colorizeImage:sourceImage withColor:[UIColor colorWithWhite: 0.0 alpha: 0.5]];
+    }
     [super setImage: outputImage];
 }
 
@@ -68,9 +74,8 @@
 
     self.favoriteButton.selected = NO;
 
-    self.posterImageView.imageURL = nil;
-
     self.posterImageView.image = nil;
+    self.posterImageView.imageURL = nil;
 }
 
 - (void)setPosterImageToURL:(NSURL *)imageURL

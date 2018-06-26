@@ -27,8 +27,9 @@
 
 - (void)fetchInformationAboutMovie;
 
-- (instancetype)initWithDictionary:(NSDictionary *)movieDict;
+- (instancetype)init;
 - (instancetype)initWithMovieID:(NSString *)movieID;
+- (BOOL)populateMovieFieldsWith:(NSDictionary *)movieDictionary;
 
 
 @end

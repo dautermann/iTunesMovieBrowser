@@ -25,14 +25,16 @@ iTunes Movie Browser sample app for SalesForce
 
 #Current known issues:
 
-1. I’m not displaying a movie description in the cells because there appears to be no “shortDescription” or summarized description in the movie information sent back by ITMS.  There is a “longDescription”, though, I’d love to figure out how to summarize it down to a short description, or I’d like to figure out what magic I need to do in the not-super-well-documented API to get the short description to be returned.
+1. The movie poster/thumbnail service (which is at http://is2-ssl.mzstatic.com and not hosted by Apple) doesn't always respond quickly, so you might see a white background before the image displays (and is cached). I could/should replace this with a "loading" indicator.
 
-2. I had a whole bunch of Unit Tests I wanted to write (e.g. valid movie objects, bogus dates, etc.) but ran out of time.  If I’m allowed to do a revision (which I’m likely to do on my own anyways), I’ll definitely add a few!  I also recently did some public source code incorporating remote server stubbing (e.g. OHHTTPStubs), and this can be seen at [https://github.com/dautermann/GMWeatherSample](https://github.com/dautermann/GMWeatherSample)
+2. Summaries (via “shortDescription”) don't always get sent back in the movie information sent back by ITMS.  There is a “longDescription”, though, I’d love to figure out how to summarize it down to a short description, or I’d like to figure out what magic I need to do in the not-super-well-documented API to get the short description to be returned.
+
+3. I had a whole bunch of Unit Tests I wanted to write (e.g. valid movie objects, bogus dates, etc.) but ran out of time.  If I’m allowed to do a revision (which I’m likely to do on my own anyways), I’ll definitely add a few!  I also recently did some public source code incorporating remote server stubbing (e.g. OHHTTPStubs), and this can be seen at [https://github.com/dautermann/GMWeatherSample](https://github.com/dautermann/GMWeatherSample)
+
+4. Long descriptions in the detail view controller don't always start at the very top position, despite me setting the content offset to zero. 
 
 # Wish I had more time to invest in:
 
-* I’m using a public “average color” UIColor extension to try to decide whether to draw light or dark text over a dark or light background, but it doesn’t seem to be behaving properly.
+* I’m using a public “average color” UIColor extension to try to decide whether to draw light or dark text over a dark or light background, but it doesn’t seem to be behaving perfectly.
 
-* I use the base class of ViewController (which I might try to rename to SearchViewController in a revision, or even better, keep a base view controller and then do the FavoritesViewController and SearchViewController off that)
-
-* using size classes or something to make the collection view cells dramatically bigger for iPad versus iPhone, as well as sizing the detail view's movie poster view even better.
+* Using size classes or something to make the collection view cells dramatically bigger for iPad versus iPhone, as well as sizing the detail view's movie poster view even better.

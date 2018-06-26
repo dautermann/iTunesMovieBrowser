@@ -21,20 +21,13 @@
 
 @implementation MovieObject
 
-// designated initializer
-- (instancetype)initWithDictionary:(NSDictionary *)movieDictionary
+// designated initializers
+- (instancetype)init
 {
     self = [super init];
     if (self)
     {
-        NSNumber *trackIDNumber = movieDictionary[@"trackId"];
-        // I'm surprised trackId coming from ITMS is numeric; I would have expected it to be a UUID-like thing...
-        if (trackIDNumber != nil)
-        {
-            _movieIDString = [trackIDNumber stringValue];
-        }
 
-        [self populateMovieFieldsWith:movieDictionary];
     }
     return self;
 }
@@ -49,7 +42,7 @@
     return self;
 }
 
-- (void)populateMovieFieldsWith:(NSDictionary *)movieDictionary
+- (BOOL)populateMovieFieldsWith:(NSDictionary *)movieDictionary
 {
     // I actually prefer to use a property's underlying ivar in init methods
     // for reasons listed in the "Don't Use Accessor Methods in Initializer Methods..." section
@@ -60,7 +53,20 @@
     //
     // I suppose I could have set properties to readwrite &/or allowed setters in a private category extension.  Which do you guys prefer?
 
+    // we only want to display single movies, not full collections (e.g. Star Wars six volume set)
+    //
+    // to do this, single movies are the dictionary objects that have a "trackName" key
     _name = movieDictionary[@"trackName"];
+    if(_name == nil)
+    {
+        return FALSE;
+    }
+    NSNumber *trackIDNumber = movieDictionary[@"trackId"];
+    // I'm surprised trackId coming from ITMS is numeric; I would have expected it to be a UUID-like thing...
+    if (trackIDNumber != nil)
+    {
+        _movieIDString = [trackIDNumber stringValue];
+    }
     _director = movieDictionary[@"artistName"];
     _releaseDate = [NSDate dateWithString:movieDictionary[@"releaseDate"]];
     _posterSmallURL = [NSURL URLWithString:movieDictionary[@"artworkUrl100"]];
@@ -78,6 +84,7 @@
 
         _posterBigURL = [NSURL URLWithString:posterString];
     }
+    return TRUE;
 }
 
 // yes, this is a duplicate of the code in the SearchViewController and it's

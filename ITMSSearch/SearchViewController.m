@@ -1,19 +1,19 @@
 //
-//  ViewController.m
+//  SearchViewController.m
 //  ITMSSearch
 //
 //  Created by Michael Dautermann on 6/25/18.
 //  Copyright © 2018 Michael Dautermann. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "SearchViewController.h"
 #import "SFSearchResultCell.h"
 #import "MovieObject.h"
 #import "DetailViewController.h"
 #import "SFAlertManager.h"
 #import "UIView+Extension.h"
 
-@interface ViewController ()
+@interface SearchViewController ()
 
 // private properties accessible from only
 // within this view controller
@@ -30,7 +30,7 @@
 
 @end
 
-@implementation ViewController
+@implementation SearchViewController
 
 - (void)viewDidLoad
 {
@@ -121,16 +121,15 @@
             {
                 NSArray *rawMovieArray = itmsResultDict[@"results"];
                 NSMutableArray *movieObjectMutableArray = [[NSMutableArray alloc] initWithCapacity:[rawMovieArray count]];
-
                 for (NSDictionary *movieDictionary in rawMovieArray)
                 {
-                    // we only want to display single movies, not full collections (e.g. Star Wars six volume set)
-                    //
-                    // to do this, single movies are the dictionary objects that have a "trackName" key
-                    if ([movieDictionary objectForKey:@"trackName"] != NULL)
+                    MovieObject *newObject = [[MovieObject alloc] init];
+                    if(newObject)
                     {
-                        MovieObject *newObject = [[MovieObject alloc] initWithDictionary:movieDictionary];
-                        [movieObjectMutableArray addObject:newObject];
+                        if ([newObject populateMovieFieldsWith:movieDictionary] == TRUE)
+                        {
+                            [movieObjectMutableArray addObject:newObject];
+                        }
                     }
                 }
 
@@ -140,7 +139,6 @@
                 // UI things need to happen on the main thread
                 // show "no movies visible" if moviearray count is zero
                 dispatch_async(dispatch_get_main_queue(), ^{
-
                     if ([self.movieArray count] == 0)
                     {
                         // animate a "no movies found" result

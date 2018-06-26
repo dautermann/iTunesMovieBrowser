@@ -6,8 +6,8 @@
 //  Copyright © 2018 Michael Dautermann. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "SearchViewController.h"
 
-@interface FavoritesViewController : ViewController
+@interface FavoritesViewController : SearchViewController
 
 @end

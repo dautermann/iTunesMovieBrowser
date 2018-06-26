@@ -13,7 +13,7 @@
 		255A06521C8203BD00F661C0 /* MovieFavoritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 255A06511C8203BD00F661C0 /* MovieFavoritesManager.swift */; };
 		2576A6B31C8181CC00819959 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B21C8181CC00819959 /* main.m */; };
 		2576A6B61C8181CC00819959 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B51C8181CC00819959 /* AppDelegate.m */; };
-		2576A6B91C8181CC00819959 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B81C8181CC00819959 /* ViewController.m */; };
+		2576A6B91C8181CC00819959 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2576A6B81C8181CC00819959 /* SearchViewController.m */; };
 		2576A6BC1C8181CC00819959 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2576A6BA1C8181CC00819959 /* Main.storyboard */; };
 		2576A6BE1C8181CC00819959 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2576A6BD1C8181CC00819959 /* Assets.xcassets */; };
 		2576A6C11C8181CC00819959 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2576A6BF1C8181CC00819959 /* LaunchScreen.storyboard */; };
@@ -52,8 +52,8 @@
 		2576A6B21C8181CC00819959 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		2576A6B41C8181CC00819959 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		2576A6B51C8181CC00819959 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		2576A6B71C8181CC00819959 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2576A6B81C8181CC00819959 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2576A6B71C8181CC00819959 /* SearchViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		2576A6B81C8181CC00819959 /* SearchViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		2576A6BB1C8181CC00819959 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2576A6BD1C8181CC00819959 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2576A6C01C8181CC00819959 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -102,8 +102,8 @@
 				255A064E1C81DAE700F661C0 /* DetailViewController.m */,
 				259580E21C82522C00A422B6 /* FavoritesViewController.h */,
 				259580E31C82522C00A422B6 /* FavoritesViewController.m */,
-				2576A6B71C8181CC00819959 /* ViewController.h */,
-				2576A6B81C8181CC00819959 /* ViewController.m */,
+				2576A6B71C8181CC00819959 /* SearchViewController.h */,
+				2576A6B81C8181CC00819959 /* SearchViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -304,7 +304,7 @@
 			files = (
 				255130B81C82A68A0086ADAA /* UIColor+Extension.m in Sources */,
 				25D78E3E1C81C6D600BD08A6 /* PhotoBrowserCache.swift in Sources */,
-				2576A6B91C8181CC00819959 /* ViewController.m in Sources */,
+				2576A6B91C8181CC00819959 /* SearchViewController.m in Sources */,
 				255A064F1C81DAE700F661C0 /* DetailViewController.m in Sources */,
 				2576A6DB1C81A3C900819959 /* NSDate+Extension.m in Sources */,
 				25B900B31C849CD100F0A4F0 /* SFAlertManager.m in Sources */,

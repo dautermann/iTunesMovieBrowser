@@ -38,4 +38,10 @@
     [[PhotoBrowserCache sharedInstance] performGetPhoto:self.movieObjectToDisplay.posterBigURL intoImageView:self.bigPosterImageView];
 }
 
+- (void)viewDidLayoutSubviews
+{
+    // if text is scrollable, start the text at the top
+    [self.movieDescriptionView setContentOffset:CGPointZero animated:NO];
+}
+
 @end
